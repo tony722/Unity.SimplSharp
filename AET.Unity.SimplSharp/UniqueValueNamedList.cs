@@ -1,4 +1,4 @@
-﻿namespace Unity.SimplSharp {
+﻿namespace AET.Unity.SimplSharp {
   public interface INamedListItem {
     string Name { get; set; }
   }

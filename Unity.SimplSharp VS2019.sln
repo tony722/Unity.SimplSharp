@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.SimplSharp.Tests", "Unity.SimplSharp.Tests\Unity.SimplSharp.Tests.csproj", "{21DF768B-A0CD-44EB-934F-0127A81AC20F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp.Tests", "AET.Unity.SimplSharp.Tests\AET.Unity.SimplSharp.Tests.csproj", "{21DF768B-A0CD-44EB-934F-0127A81AC20F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.SimplSharp VS2019", "Unity.SimplSharp\Unity.SimplSharp VS2019.csproj", "{90BD5C23-A2CA-4B45-B300-DF21F41F2C11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp VS2019", "AET.Unity.SimplSharp\AET.Unity.SimplSharp VS2019.csproj", "{90BD5C23-A2CA-4B45-B300-DF21F41F2C11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

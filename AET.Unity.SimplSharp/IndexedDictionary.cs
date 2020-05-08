@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Unity.SimplSharp {
+namespace AET.Unity.SimplSharp {
   public class IndexedDictionary<TKey, TValue> : IEnumerable<TValue> {
     private readonly List<TValue> list = new List<TValue>();
     private readonly Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();

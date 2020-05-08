@@ -1,7 +1,7 @@
 ﻿using System;
 using Crestron.SimplSharp;
 
-namespace Unity.SimplSharp.Timer {
+namespace AET.Unity.SimplSharp.Timer {
   public class CrestronTimer : ITimer{    
     #region ITimer Members
 

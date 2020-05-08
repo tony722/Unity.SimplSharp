@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unity.SimplSharp.Timer {
+namespace AET.Unity.SimplSharp.Timer {
   public interface ITimer {
     Action TimerCallback { set; }
     bool IsRunning { get; }

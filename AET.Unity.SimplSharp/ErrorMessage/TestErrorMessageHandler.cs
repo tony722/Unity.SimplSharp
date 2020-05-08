@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unity.SimplSharp.ErrorMessage {
+namespace AET.Unity.SimplSharp {
   public class TestErrorMessageHandler : IErrorMessageHandler {
     public TestErrorMessageHandler() {
       Message = (s1, s2) => { };

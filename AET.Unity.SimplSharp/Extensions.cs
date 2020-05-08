@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unity.SimplSharp {
+namespace AET.Unity.SimplSharp {
   public static class Extensions {
     /// <summary>
     /// Parses a string to an Int. Returns 0 if anything goes wrong (i.e. null, not integer, etc).

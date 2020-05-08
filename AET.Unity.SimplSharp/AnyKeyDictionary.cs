@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Unity.SimplSharp {
+namespace AET.Unity.SimplSharp {
 
   /// <summary>
   /// A dictionary that does not throw KeyNotFoundExceptions or ArgumentExceptions (Item with the same key has already been added).

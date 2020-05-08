@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Unity.SimplSharp {
+namespace AET.Unity.SimplSharp {
 
   /// <summary>
   /// With this dictionary, both the key and the value are unique.

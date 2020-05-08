@@ -7,8 +7,8 @@
     <ProjectGuid>{90BD5C23-A2CA-4B45-B300-DF21F41F2C11}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Unity.SimplSharp</RootNamespace>
-    <AssemblyName>Unity.SimplSharp</AssemblyName>
+    <RootNamespace>AET.Unity.SimplSharp</RootNamespace>
+    <AssemblyName>AET.Unity.SimplSharp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,4 +1,4 @@
-﻿namespace Unity.SimplSharp.ErrorMessage {
+﻿namespace AET.Unity.SimplSharp {
   public static class ErrorMessage {
     static ErrorMessage() {
       ErrorMessageHandler = new CrestronErrorMessageHandler();

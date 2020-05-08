@@ -1,9 +1,7 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Unity.SimplSharp;
 
-namespace AET.SimplSharp.Tests {
+namespace Unity.SimplSharp.Tests {
   [TestClass]
   public class ExtensionTests {
     [TestMethod]

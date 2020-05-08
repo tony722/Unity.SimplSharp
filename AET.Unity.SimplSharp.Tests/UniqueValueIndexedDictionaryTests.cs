@@ -1,10 +1,8 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
-using AET.SimplSharp;
-using Unity.SimplSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AET.SimplSharp.Tests {
+namespace Unity.SimplSharp.Tests {
   [TestClass]
   public class UniqueValueIndexedDictionaryTests {
     readonly object testObject = new object();

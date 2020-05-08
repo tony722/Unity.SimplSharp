@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Unity.SimplSharp {
+namespace AET.Unity.SimplSharp {
   //
   //This class should be replaced by HashSet<T> if Crestron upgrades to a later Framework that supports it
   //

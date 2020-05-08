@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unity.SimplSharp.Timer {
+namespace AET.Unity.SimplSharp.Timer {
   public class TestsTimer : ITimer {
 
     public Action TimerCallback { private get; set; }
