@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
+    <Compile Include="ConfigCollection.cs" />
     <Compile Include="CrestronUnitTestDetector.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\ErrorMessage.cs" />

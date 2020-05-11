@@ -2,9 +2,6 @@
 
 namespace AET.Unity.SimplSharp {
   public class TestErrorMessageHandler : IErrorMessageHandler {
-    public TestErrorMessageHandler() {
-      Message = (s1, s2) => { };
-    }
 
     public void Error(string message) {
       WriteErrorMessage("Error", message);
@@ -21,6 +18,7 @@ namespace AET.Unity.SimplSharp {
     private void WriteErrorMessage(string messageType, string message) {
       if(Message != null) Message(messageType, message);
     }
+
     public Action<string, string> Message { get; set; }
 
   }

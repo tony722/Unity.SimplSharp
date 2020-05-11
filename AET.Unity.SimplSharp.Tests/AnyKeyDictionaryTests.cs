@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using AET.Unity.SimplSharp;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Unity.SimplSharp.Tests {

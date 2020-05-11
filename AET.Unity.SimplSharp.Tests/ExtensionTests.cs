@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AET.Unity.SimplSharp;
 
 namespace Unity.SimplSharp.Tests {
   [TestClass]
