@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.SimplSharp", "AET.SimplSharp\AET.SimplSharp.csproj", "{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp", "AET.Unity.SimplSharp\AET.Unity.SimplSharp.csproj", "{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

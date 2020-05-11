@@ -24,7 +24,7 @@ namespace AET.Unity.SimplSharp {
         if(dict.TryGetValue(key, out value)) {
           return value;
         } else {
-          ErrorMessage.ErrorMessage.Notice("Tried to request key {0} that does not exist: returned default.", key);
+          ErrorMessage.Notice("Tried to request key {0} that does not exist: returned default.", key);
           return default(TValue);
         }
       }
