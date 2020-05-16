@@ -1,4 +1,6 @@
 ﻿using System;
+using Crestron.SimplSharp;
+
 
 namespace AET.Unity.SimplSharp {
   public static class Extensions {
@@ -40,10 +42,25 @@ namespace AET.Unity.SimplSharp {
       }
     }
 
-    /// <summary>
-    /// Converts value from 0-100 to 0-65535
-    /// </summary>
-    public static int ConvertHundredBaseTo16Bit(this int value) {
+    public static T SafeParseEnum<T>(this string value) where T : struct, IConvertible { // constraint "struct, IConvertible" because System.Enum is not allowed until C# 7
+      if (String.IsNullOrEmpty(value)) {
+        ErrorMessage.Warn("Tried to parse Enum '{0}' from a null/empty value.", typeof(T).Name);
+        return default(T);
+      }
+      try {
+        return (T) Enum.Parse(typeof(T), value, true);
+      }
+      catch {
+        ErrorMessage.Warn("Tried to parse Enum '{0}', but value '{1}' not found.", typeof(T).Name, value);
+        return default(T);
+      }
+    }
+
+
+  /// <summary>
+  /// Converts value from 0-100 to 0-65535
+  /// </summary>
+  public static int ConvertHundredBaseTo16Bit(this int value) {
       return (value * 0xffff) / 100;
     }
     

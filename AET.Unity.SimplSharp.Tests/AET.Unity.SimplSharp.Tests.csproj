@@ -64,6 +64,7 @@
     <Compile Include="AnyKeyDictionaryTests.cs" />
     <Compile Include="ExtensionTests.cs" />
     <Compile Include="ConfigCollectionTests.cs" />
+    <Compile Include="AssemblyInit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

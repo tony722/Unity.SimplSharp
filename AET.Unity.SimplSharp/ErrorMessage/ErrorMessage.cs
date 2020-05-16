@@ -1,9 +1,16 @@
-﻿namespace AET.Unity.SimplSharp {
+﻿using System;
+
+namespace AET.Unity.SimplSharp {
   public static class ErrorMessage {
     static ErrorMessage() {
       ErrorMessageHandler = new CrestronErrorMessageHandler();
     }
     public static IErrorMessageHandler ErrorMessageHandler { get; set; }
+
+    public static void Clear() {
+      LastErrorMessage = String.Empty;
+      LastErrorMessageType = String.Empty;
+    }
 
     public static string LastErrorMessageType { get; private set; }
     public static string LastErrorMessage { get; private set; }

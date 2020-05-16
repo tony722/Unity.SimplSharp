@@ -6,18 +6,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Unity.SimplSharp.Tests {
   [TestClass]
   public class ConfigCollectionTests {
-    [ClassInitialize]
-    public static void ClassInit(TestContext unusedTestContext) {
-      ErrorMessage.ErrorMessageHandler = new TestErrorMessageHandler();
-    }
-
 
     #region Test Object Definitions
-    private class ConfigCollectionTester : ConfigCollection<TestItem> {
+    private class ConfigCollectionTester : IdCollection<TestItem> {
 
     }
 
-    private class TestItem : ConfigCollectionItem {
+    private class TestItem : IdCollectionItem {
 
     }
     #endregion
