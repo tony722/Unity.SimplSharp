@@ -17,15 +17,10 @@ namespace Unity.SimplSharp.Tests {
       var timer = new TestTimer();
       queue.Mutex = new TestMutex();
       queue.Timer = timer;
-      
+      timer.ElapseImmediately = true;
+
       var commandsToSend = new string[] {"tx1", "tx2", "tx3", "tx4"};
       Parallel.ForEach(commandsToSend, (c) => queue.Send(c));
-      tx.Count.Should().Be(1);
-      timer.TimerElapsed();
-      tx.Count.Should().Be(2);
-      timer.TimerElapsed();
-      tx.Count.Should().Be(3); 
-      timer.TimerElapsed();
       tx.Count.Should().Be(4);
       tx.Should().Contain(commandsToSend);
     }
