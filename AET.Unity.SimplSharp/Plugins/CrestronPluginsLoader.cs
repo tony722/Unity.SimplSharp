@@ -8,7 +8,7 @@ using Crestron.SimplSharp.Reflection;
 using Activator = Crestron.SimplSharp.Reflection.Activator;
 
 namespace AET.Unity.SimplSharp.Plugins {
-  public class CrestronPluginsLoader {
+  public class CrestronPluginsLoader : IPluginsLoader {
     private string filespec;
     private string pluginFolder;
 

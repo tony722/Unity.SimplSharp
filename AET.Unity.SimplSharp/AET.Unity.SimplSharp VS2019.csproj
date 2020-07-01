@@ -66,9 +66,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
+    <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
     <Compile Include="Mutex\TestMutex.cs" />
+    <Compile Include="Plugins\CrestronPluginsLoader.cs" />
+    <Compile Include="Plugins\IPluginsLoader.cs" />
+    <Compile Include="Plugins\IPluginTester.cs" />
+    <Compile Include="Plugins\TestPluginsLoader.cs" />
+    <Compile Include="Tuple\System.Collections\IStructuralComparable.cs" />
+    <Compile Include="Tuple\System.Collections\IStructuralEquatable.cs" />
+    <Compile Include="Tuple\System.Numerics.Hashing\HashHelpers.cs" />
+    <Compile Include="Tuple\System.Runtime.CompilerServices\ITuple.cs" />
+    <Compile Include="Tuple\System.Runtime.CompilerServices\TupleElementNamesAttribute.cs" />
+    <Compile Include="Tuple\Tuple.cs" />
+    <Compile Include="Tuple\TupleExtensions.cs" />
+    <Compile Include="Tuple\ValueTuple.cs" />
     <Compile Include="TxQueue.cs" />
     <Compile Include="IdCollection.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
@@ -85,6 +98,13 @@
     <Compile Include="UniqueValueNamedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniqueValueIndexedDictionary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tuple\LICENSE" />
+    <None Include="Tuple\SSCoreTupleLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tuple\Readme.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

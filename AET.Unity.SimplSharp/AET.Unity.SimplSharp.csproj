@@ -74,6 +74,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdCollection.cs" />
+    <Compile Include="Microsoft\Xml\XmlConverter.cs" />
+    <Compile Include="Mutex\CrestronMutex.cs" />
+    <Compile Include="Mutex\IMutex.cs" />
+    <Compile Include="Mutex\TestMutex.cs" />
     <Compile Include="Timer\CrestronTimer.cs" />
     <Compile Include="Emailer.cs" />
     <Compile Include="HashCollection.cs" />
@@ -81,6 +85,31 @@
     <Compile Include="IndexedDictionary.cs" />
     <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tuple\System.Collections\IStructuralComparable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\System.Collections\IStructuralEquatable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\System.Numerics.Hashing\HashHelpers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\System.Runtime.CompilerServices\ITuple.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\System.Runtime.CompilerServices\TupleElementNamesAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\Tuple.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\TupleExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tuple\ValueTuple.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TxQueue.cs" />
     <Compile Include="UniqueValueIndexedDictionary.cs" />
     <Compile Include="UniqueValueNamedList.cs" />
     <None Include="Properties\ControlSystem.cfg" />

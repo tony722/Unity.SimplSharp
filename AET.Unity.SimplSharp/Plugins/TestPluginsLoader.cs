@@ -18,11 +18,15 @@ namespace AET.Unity.SimplSharp.Plugins {
       this.filespec = filespec;
       this.pluginFolder = pluginFolder;
 
-      var types = GetTypesFromPluginAssemblies().FindAll(delegate (Type t) {
+      return GetPluginInstancesDictionary<T>();
+    }
+
+    private Dictionary<string, T> GetPluginInstancesDictionary<T>() {
+      var types = GetTypesFromPluginAssemblies().FindAll(delegate(Type t) {
         var interfaceTypes = new List<Type>(t.GetInterfaces());
         return interfaceTypes.Contains(typeof(T));
       });
-      var loadedAssemblies = types.Select(t => (T)Activator.CreateInstance(t)).ToList();
+      var loadedAssemblies = types.Select(t => (T) Activator.CreateInstance(t)).ToList();
 
       return loadedAssemblies.ToDictionary(a => a.GetType().Name, a => a);
     }
