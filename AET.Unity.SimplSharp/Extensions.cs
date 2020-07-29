@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Text;
 using Crestron.SimplSharp;
@@ -106,6 +107,11 @@ namespace AET.Unity.SimplSharp {
           return false;
       }
       return true;
+    }
+
+    public static IList<string> ParseCsv(this string value) {
+      var parser = new CsvParser();
+      return parser.ParseLine(value);
     }
   }
 }
