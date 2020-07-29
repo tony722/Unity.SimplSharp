@@ -66,6 +66,7 @@
     <Compile Include="ConfigCollectionTests.cs" />
     <Compile Include="AssemblyInit.cs" />
     <Compile Include="TxQueueTests.cs" />
+    <Compile Include="CsvParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

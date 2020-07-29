@@ -24,6 +24,10 @@ namespace AET.Unity.SimplSharp {
       get { return itemsById.Count; }
     }
 
+    public void Clear() {
+      itemsById.Clear();
+    }
+
     public T this[int id] {
       get {
         T item;
