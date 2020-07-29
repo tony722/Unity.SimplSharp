@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="CrestronUnitTestDetector.cs" />
+    <Compile Include="CsvParser.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\ErrorMessage.cs" />
     <Compile Include="ErrorMessage\IErrorMessageHandler.cs" />
@@ -73,11 +74,14 @@
     <Compile Include="Extensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileIO\CrestronFileIO.cs" />
+    <Compile Include="FileIO\IFileIO.cs" />
+    <Compile Include="Http\CrestronHttpReader.cs" />
+    <Compile Include="Http\IHttpReader.cs" />
     <Compile Include="IdCollection.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
-    <Compile Include="Mutex\TestMutex.cs" />
     <Compile Include="Timer\CrestronTimer.cs" />
     <Compile Include="Emailer.cs" />
     <Compile Include="HashCollection.cs" />

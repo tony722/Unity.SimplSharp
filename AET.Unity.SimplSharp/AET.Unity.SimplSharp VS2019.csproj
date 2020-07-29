@@ -67,6 +67,12 @@
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="CsvParser.cs" />
+    <Compile Include="FileIO\CrestronFileIO.cs" />
+    <Compile Include="FileIO\IFileIO.cs" />
+    <Compile Include="FileIO\TestFileIO.cs" />
+    <Compile Include="Http\CrestronHttpReader.cs" />
+    <Compile Include="Http\IHttpReader.cs" />
+    <Compile Include="Http\TestHttpReader.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />

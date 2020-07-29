@@ -36,7 +36,7 @@ namespace Unity.SimplSharp.Tests {
     public void DoubleQuotesInsideQuotes_SplitsCorrectly() {
       parser.ParseLine("Hello,\"\"\"This\"\",Is\",A Test").Should().BeEquivalentTo(new[] { "Hello", "\"This\",Is", "A Test" });
       parser.ParseLine("Hello,\"This\"\",Is\",A Test").Should().BeEquivalentTo(new[] { "Hello", "This\",Is", "A Test" });
-      parser.ParseLine("Hello,\"This\"\",,,\"\",\"\"Is\",A Test").Should().BeEquivalentTo(new[] { "Hello", "This\",,,\",\"Is", "A Test" });
+      parser.ParseLine("Hello,\"This\"\",,,\"\",\"\"Is\",\"\"\"A\"\" Test\"").Should().BeEquivalentTo(new[] { "Hello", "This\",,,\",\"Is", "\"A\" Test" });
     }
   }
 }
