@@ -1,7 +1,7 @@
 ﻿using Crestron.SimplSharp;
 
 namespace AET.Unity.SimplSharp {
-  class CrestronErrorMessageHandler : IErrorMessageHandler {
+  internal class CrestronErrorMessageHandler : IErrorMessageHandler {
 
     public void Error(string message) {
       ErrorLog.Error(message);

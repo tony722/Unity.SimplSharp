@@ -16,7 +16,9 @@ namespace AET.Unity.SimplSharp {
     }
 
     public void Exit() {
-      CMonitor.Exit(mutex);
+      try {
+        CMonitor.Exit(mutex);
+      } catch { }
     }
   }
 }

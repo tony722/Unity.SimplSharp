@@ -7,17 +7,19 @@ using AET.Unity.SimplSharp.Timer;
 using Crestron.SimplSharp;
 
 namespace AET.Unity.SimplSharp {
-  public class TxQueue {
-    private Queue<string> queue = new Queue<string>();
-    private Action<string> txAction;
+  public class TxQueue<T> {
+    private Queue<T> queue = new Queue<T>();
+    private Action<T> txAction;
     private ITimer timer;
 
-    public TxQueue(Action<string> txAction, int spaceBetweenCommandsMs) {
+    public TxQueue(Action<T> txAction, int spaceBetweenCommandsMs) {
       this.txAction = txAction;
       SpaceBetweenCommandsMs = spaceBetweenCommandsMs;
       Timer = new CrestronTimer();
       Mutex = new CrestronMutex();
     }
+
+    #region For Mocking
 
     public IMutex Mutex { get; set; }
     public IMutex ActionMutex { get; set; }
@@ -28,9 +30,10 @@ namespace AET.Unity.SimplSharp {
         timer.TimerCallback = TimerCallback;
       }
     }
-    
+    #endregion
+
     /// <summary>
-    /// The space between commands sent out. Should be at least a few ms. 0 may cause problems.
+    /// The space between commands sent out. If 0 then sends immediately.
     /// </summary>
     public int SpaceBetweenCommandsMs { get; set; }
 
@@ -38,18 +41,19 @@ namespace AET.Unity.SimplSharp {
       get { return Timer.IsRunning || queue.Count > 0; }
     }
 
-    public void Send(string value) {
+    public void Send(T value) {
       Mutex.Enter();
       queue.Enqueue(value);
       TriggerSend();
       Mutex.Exit();
-    }
+    }    
 
     private void TriggerSend() {
       if (queue.Count == 0) return;
       if (Timer.IsRunning) return;
       txAction(queue.Peek());
-      Timer.Start(SpaceBetweenCommandsMs);
+      if(SpaceBetweenCommandsMs > 0) Timer.Start(SpaceBetweenCommandsMs);
+      else TimerCallback();
     }
     private void TimerCallback() {
       Mutex.Enter();

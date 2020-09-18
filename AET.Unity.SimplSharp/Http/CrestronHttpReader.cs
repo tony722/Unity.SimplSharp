@@ -15,7 +15,7 @@ namespace AET.Unity.SimplSharp.Http {
     }
 
     public string GetHttpText(string url) {
-      var client = new HttpClient();
+      var client = new Crestron.SimplSharp.Net.Http.HttpClient();
       var response = client.GetResponse(url);
       return response.ContentString;
     }

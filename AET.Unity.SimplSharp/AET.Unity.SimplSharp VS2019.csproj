@@ -11,6 +11,7 @@
     <AssemblyName>AET.Unity.SimplSharp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +40,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -46,12 +50,14 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SimplSharpCustomAttributesInterface">
       <HintPath>C:\ProgramData\Crestron\SDK\SimplSharpCustomAttributesInterface.dll</HintPath>
     </Reference>
-    <Reference Include="SimplSharpHelperInterface">
+    <Reference Include="SimplSharpHelperInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\ProgramData\Crestron\SDK\SimplSharpHelperInterface.dll</HintPath>
     </Reference>
     <Reference Include="SimplSharpReflectionInterface">
@@ -67,12 +73,15 @@
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="CsvParser.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="FileIO\CrestronFileIO.cs" />
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="FileIO\TestFileIO.cs" />
+    <Compile Include="HttpClient\CrestronHttpClient.cs" />
+    <Compile Include="HttpClient\IHttpClient.cs" />
+    <Compile Include="HttpClient\TestHttpClient.cs" />
     <Compile Include="Http\CrestronHttpReader.cs" />
     <Compile Include="Http\IHttpReader.cs" />
-    <Compile Include="Http\TestHttpReader.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
@@ -108,12 +117,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Tuple\LICENSE" />
-    <None Include="Tuple\SSCoreTupleLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tuple\Readme.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

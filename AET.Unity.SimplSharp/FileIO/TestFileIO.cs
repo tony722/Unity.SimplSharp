@@ -1,7 +1,7 @@
 ﻿using System.IO;
 
 namespace AET.Unity.SimplSharp.FileIO {
-  class TestFileIO : IFileIO {
+  public class TestFileIO : IFileIO {
     public string ReadAllText(string fileName) {
       return File.ReadAllText(fileName);
     }

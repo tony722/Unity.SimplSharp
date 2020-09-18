@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AET.Unity.SimplSharp;
@@ -114,7 +115,34 @@ namespace Unity.SimplSharp.Tests {
     public void SafeParseBool_NonTrueValues_ReturnsFalse(string value) {
       value.SafeParseBool().Should().BeFalse();
     }
-    
-  #endregion
+
+    #endregion
+    #region FormatAsList
+
+    [TestMethod]
+    public void FormatAsList_Null_ReturnsNull() {
+      string[] s = null;
+      s.FormatAsList().Should().BeNull();
+    }
+
+    [TestMethod]
+    public void FormatAsList_SingleElement_ReturnsElement() {
+      string[] s = new [] {""};
+      s.FormatAsList().Should().Be("");
+    }
+
+    [TestMethod]
+    public void FormatAsList_TwoElements_ReturnsElementsSeparatedByOr() {
+      string[] s = new[] {"this", "that"};
+      s.FormatAsList().Should().Be("this or that");
+    }
+
+    [TestMethod]
+    public void FormatAsList_MoreThanTwoElements_ReturnsElementsSeparatedByCommas() {
+      string[] s = new[] { "this", "that", "the other" };
+      s.FormatAsList().Should().Be("this, that, or the other");
+    }
+    #endregion
   }
+
 }
