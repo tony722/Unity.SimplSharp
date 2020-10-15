@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AET.Unity.SimplSharp {
   /// <summary>
@@ -20,6 +17,7 @@ namespace AET.Unity.SimplSharp {
   /// <typeparam name="T"></typeparam>
   public class IdCollection<T> : IEnumerable<T> where T : IdCollectionItem {
     private readonly Dictionary<int, T> itemsById = new Dictionary<int, T>();
+
     public int Count {
       get { return itemsById.Count; }
     }
@@ -38,7 +36,8 @@ namespace AET.Unity.SimplSharp {
       set {
         if (itemsById.ContainsKey(id)) {
           itemsById[id] = value;
-        } else {
+        }
+        else {
           itemsById.Add(id, value);
           value.Id = id;
         }

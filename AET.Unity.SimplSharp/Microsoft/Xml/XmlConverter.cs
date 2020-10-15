@@ -1,13 +1,10 @@
-﻿using System.Text;
-
-namespace Microsoft.Xml {
+﻿namespace Microsoft.Xml {
   /// <summary>
   /// Imported from .NET Core
   /// </summary>
   internal static class XmlConverter {
     // Licensed to the .NET Foundation under one or more agreements.
     // The .NET Foundation licenses this file to you under the MIT license.
-    // See the LICENSE file in the project root for more information.
 
     // Note: this is only part of the XmlConverter class
     // https://source.dot.net/#System.Private.DataContractSerialization/System/Xml/XmlConverter.cs,9ee8f1cde85f7b1c
@@ -21,6 +18,7 @@ namespace Microsoft.Xml {
         offset++;
         count--;
       }
+
       if (count < 1 || count > 10)
         return false;
       int value = 0;
@@ -32,22 +30,26 @@ namespace Microsoft.Xml {
           int pow10 = 1;
           while (offset < offsetMax) {
             ch = chars[offset] - '0';
-            if (((uint)ch) >= 10)
+            if (((uint) ch) >= 10)
               return false;
             pow10 *= 10;
             value = value * 10 + ch;
             offset++;
           }
+
           if (negative)
-            result = -(double)value / pow10;
+            result = -(double) value / pow10;
           else
-            result = (double)value / pow10;
+            result = (double) value / pow10;
           return true;
-        } else if (((uint)ch) >= 10)
+        }
+        else if (((uint) ch) >= 10)
           return false;
+
         value = value * 10 + ch;
         offset++;
       }
+
       // Ten digits w/out a decimal point might have overflowed the int
       if (count == 10)
         return false;

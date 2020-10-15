@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace AET.Unity.SimplSharp.Plugins {
@@ -37,6 +36,7 @@ namespace AET.Unity.SimplSharp.Plugins {
       foreach (var assembly in assemblies) {
         availableTypes.AddRange(assembly.GetTypes());
       }
+
       return availableTypes;
     }
 
@@ -45,11 +45,7 @@ namespace AET.Unity.SimplSharp.Plugins {
       var files = dInfo.GetFiles(filespec);
       var plugInAssemblyList = new List<Assembly>();
 
-      if (null != files) {
-        foreach (var file in files) {
-          plugInAssemblyList.Add(Assembly.LoadFrom(file.FullName));
-        }
-      }
+      foreach (var file in files) plugInAssemblyList.Add(Assembly.LoadFrom(file.FullName));
 
       return plugInAssemblyList;
     }

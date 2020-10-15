@@ -3,6 +3,5 @@
     void Error(string message);
     void Warn(string message);
     void Notice(string message);
-
   }
 }

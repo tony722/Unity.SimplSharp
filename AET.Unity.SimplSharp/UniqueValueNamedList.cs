@@ -2,6 +2,7 @@
   public interface INamedListItem {
     string Name { get; set; }
   }
+
   public class UniqueValueNamedList<T> : UniqueValueIndexedDictionary<string, T> where T : INamedListItem, new() {
     public virtual void Add(T item) {
       base.Add(item.Name, item);

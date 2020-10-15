@@ -4,8 +4,7 @@ namespace AET.Unity.SimplSharp {
   //
   //This class should be replaced by HashSet<T> if Crestron upgrades to a later Framework that supports it
   //
-  public class HashCollection<T> : ICollection<T> {    
-
+  public class HashCollection<T> : ICollection<T> {
     private readonly Dictionary<T, bool> dict;
     private readonly List<T> list;
 
@@ -46,9 +45,13 @@ namespace AET.Unity.SimplSharp {
       get { return list.Count; }
     }
 
-    public T this[int index] { get { return list[index]; } }
+    public T this[int index] {
+      get { return list[index]; }
+    }
 
-    public bool IsReadOnly { get { return false; } }
+    public bool IsReadOnly {
+      get { return false; }
+    }
 
     public bool Remove(T item) {
       list.Remove(item);

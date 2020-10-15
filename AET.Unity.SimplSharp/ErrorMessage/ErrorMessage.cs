@@ -5,6 +5,7 @@ namespace AET.Unity.SimplSharp {
     static ErrorMessage() {
       ErrorMessageHandler = new CrestronErrorMessageHandler();
     }
+
     public static IErrorMessageHandler ErrorMessageHandler { get; set; }
 
     public static void Clear() {
@@ -21,12 +22,14 @@ namespace AET.Unity.SimplSharp {
       LastErrorMessageType = "Error";
       LastErrorMessage = message;
     }
+
     public static void Notice(string messageFormat, params object[] arg) {
       var message = string.Format(messageFormat, arg);
       ErrorMessageHandler.Notice(message);
       LastErrorMessageType = "Notice";
       LastErrorMessage = string.Format(message, arg);
     }
+
     public static void Warn(string messageFormat, params object[] arg) {
       var message = string.Format(messageFormat, arg);
       ErrorMessageHandler.Warn(message);

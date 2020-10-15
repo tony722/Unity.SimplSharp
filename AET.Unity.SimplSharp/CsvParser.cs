@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AET.Unity.SimplSharp {
   public class CsvParser {
@@ -10,9 +8,9 @@ namespace AET.Unity.SimplSharp {
     private int pos, lastChar;
     string cell;
 
-    public IList<String> ParseLine(string line) {
-      list =  new List<string>();
-      this.line = line;
+    public IList<String> ParseLine(string lineToParse) {
+      list = new List<string>();
+      line = lineToParse;
       cell = string.Empty;
       if (!string.IsNullOrEmpty(line)) ParseCommas();
       return list;
@@ -26,10 +24,12 @@ namespace AET.Unity.SimplSharp {
           list.Add(cell);
           cell = string.Empty;
           if (pos < lastChar && line[pos + 1] == '\"') ParseQuoteDelimited();
-        } else {
+        }
+        else {
           cell += line[pos];
         }
       }
+
       list.Add(cell);
     }
 

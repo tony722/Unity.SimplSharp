@@ -1,138 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Crestron.SimplSharp.Net.Http;
+using AET.Unity.SimplSharp.HttpUtility;
 using Crestron.SimplSharp;
-using System.Threading;
-using Crestron.SimplSharp.CrestronIO;
-using Crestron.SimplSharp.Net;
 
 namespace AET.Unity.SimplSharp.HttpClient {
   public class CrestronHttpClient : IHttpClient {
-    private CMutex mutex = new CMutex();    
+    private readonly HttpClientPool pool;
 
-    public CrestronHttpClient() { }
-
-    public void Post(string url, string contents) {
-      Post(url, contents, (responseString) => {
-        if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient.Post({0}) Results:\r\n{1}", url, responseString);
-      });
+    public CrestronHttpClient(int poolSize) {
+      pool = new HttpClientPool(poolSize);
     }
 
     public ushort Debug { get; set; }
-    public ushort TimeoutMs { get; set; }
-
-    public void Post(string url, string contents, Action<string> responseCallback) {
-      var request = BuildRequest(url, contents);
-      var httpClient = new Crestron.SimplSharp.Net.Http.HttpClient();
-      try {
-        if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient HttpRequest: {0} | {1}", url, contents);
-        var response = httpClient.Post(url, System.Text.Encoding.ASCII.GetBytes(contents));
-        responseCallback(response);
-      }
-      catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient Error: {0}", ex.Message);
-      }
-      finally {
-        httpClient.Abort();
-        httpClient.Dispose();
-      }
-    }
-
-    public void PostAsync(string url, string contents) {
-      PostAsync(url, contents, (responseString) => {
-        if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient.PostAsync({0}):\r\n{1}", url, responseString);
-      });
-    }
-
-    public void PostAsync(string url, string contents, Action<string> callbackAction) {
-      var httpClient = new Crestron.SimplSharp.Net.Http.HttpClient();
-      var callbackObject = new AsyncCallbackObject { Url = url, Callback = callbackAction, HttpClient = httpClient };
-      if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient.PostAsync({0}):", url);
-      var request = BuildRequest(url, contents);
-      try {
-        if (Debug == 1) CrestronConsole.PrintLine("{0}", contents);
-        var error = httpClient.DispatchStringAsyncEx(request, Encoding.ASCII, PostAsyncCallback, callbackObject);
-        if (error != Crestron.SimplSharp.Net.Http.HttpClient.DISPATCHASYNC_ERROR.PENDING) {
-          ErrorMessage.Error("Unity.HttpClient.PostAsync({0}): {1}", url, error.ToString());
-        }
-      } catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient API Error: {0}", ex.Message);
-      }
-    }
-
-    private void PostAsyncCallback(string response, HTTP_CALLBACK_ERROR err, object userObject) {
-      var callbackObject = userObject as AsyncCallbackObject;
-      if (callbackObject == null) return;
-      try {
-        if (err == HTTP_CALLBACK_ERROR.COMPLETED) callbackObject.Callback(response);
-        else ErrorMessage.Error("Unity.HttpClient.PostAsync({0}): {1}", callbackObject.Url, err.ToString());
-      } catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient.PostAsync({0}): {1}", callbackObject.Url, ex.Message);
-      } finally {
-        callbackObject.HttpClient.Abort();
-        callbackObject.HttpClient.Dispose();
-      }
-    }
 
     public string Get(string url) {
-      var httpClient = new Crestron.SimplSharp.Net.Http.HttpClient();
-      try {
-        var results = httpClient.Get(url);
-        if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient.Get: {0}\r\n{1}", url, results);
-        return results;
-      }
-      catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient Get({1}) Error: {0}", ex.Message, url);
-        return "";
-      }
-      finally {
-        httpClient.Abort();
-        httpClient.Dispose();
-      }
+      return Get(url, null);
     }
 
-    public void GetAsync(string url, Action<string> callbackAction) {
-      var httpClient = new Crestron.SimplSharp.Net.Http.HttpClient();
-      var callbackObject = new AsyncCallbackObject { Url = url, Callback = callbackAction, HttpClient = httpClient };
-      try {
-        httpClient.KeepAlive = false;
-        if (Debug == 1) CrestronConsole.PrintLine("Unity.HttpClient.GetAsync: {0}", url);
-        httpClient.GetAsyncEx(url, Encoding.ASCII, GetAsyncCallback, callbackObject);
-      } catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient.GetAsync({1}) Error: {0}", ex.Message, url);
-      }
+    public string Get(string url, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
+      if (Debug == 1) CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.PostAsync({0})", url);
+      var results = pool.Get(url);
+      if (Debug == 1) CrestronConsole.PrintLine("Results status({0}): {1}", results.Status, results.Content);
+      return results.Content;
     }
 
-    private void GetAsyncCallback(string results, HTTP_CALLBACK_ERROR err, object userObject) {
-      var callbackObject = userObject as AsyncCallbackObject;
-      if (callbackObject == null) return;
-      try {
-        if (Debug == 1) CrestronConsole.PrintLine("{0}", results);
-        if (err == HTTP_CALLBACK_ERROR.COMPLETED) callbackObject.Callback(results);
-        else ErrorMessage.Error("Unity.HttpClient.GetAsync({1}) Error: {0}", err.ToString(), callbackObject.Url);
-      } catch (Exception ex) {
-        ErrorMessage.Error("Unity.HttpClient.GetAsync({1}) Error: {0}", ex.Message, callbackObject.Url);
-      } finally {
-        callbackObject.HttpClient.Abort();
-        callbackObject.HttpClient.Dispose();
-      }
+    public string Post(string url, string contents) {
+      return Post(url, contents, null);
     }
 
-    private HttpClientRequest BuildRequest(string url, string contents) {
-      return new HttpClientRequest {
-        RequestType = RequestType.Post,
-        CloseStream = true,
-        ContentString = contents,
-        Url = { Url = url },
-        KeepAlive = false,
-        Header = { ContentType = "application/json" }
-      };
-    }
-
-    private class AsyncCallbackObject {
-      public string Url { get; set; }
-      public Action<String> Callback { get; set; }
-      public Crestron.SimplSharp.Net.Http.HttpClient HttpClient { get; set; }
+    public string Post(string url, string contents, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
+      if (Debug == 1) CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.Post({0})\r\nContents: {1}", url, contents);
+      var results = pool.Post(url, contents, additionalHeaders);
+      if (Debug == 1) CrestronConsole.PrintLine("Results status({0}): {1}", results.Status, results.Content);
+      return results.Content;
     }
   }
 }

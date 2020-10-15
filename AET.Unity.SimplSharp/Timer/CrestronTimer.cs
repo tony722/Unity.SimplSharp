@@ -2,7 +2,7 @@
 using Crestron.SimplSharp;
 
 namespace AET.Unity.SimplSharp.Timer {
-  public class CrestronTimer : ITimer{    
+  public class CrestronTimer : ITimer {
     #region ITimer Members
 
     private CTimer timer = null;
@@ -28,8 +28,8 @@ namespace AET.Unity.SimplSharp.Timer {
 
     private void CTimerCallback(object o) {
       IsRunning = false;
-      timer.Dispose();      
-      TimerCallback(); 
+      timer.Dispose();
+      TimerCallback();
     }
 
     #endregion

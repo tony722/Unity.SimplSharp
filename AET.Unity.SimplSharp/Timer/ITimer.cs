@@ -7,5 +7,5 @@ namespace AET.Unity.SimplSharp.Timer {
     void Start(long timeoutMs);
 
     void Restart();
-  }  
+  }
 }

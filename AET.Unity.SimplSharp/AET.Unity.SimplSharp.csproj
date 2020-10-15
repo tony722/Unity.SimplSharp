@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
-    <Compile Include="CrestronUnitTestDetector.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\ErrorMessage.cs" />
@@ -78,13 +77,14 @@
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
-    <Compile Include="Http\CrestronHttpReader.cs" />
-    <Compile Include="Http\IHttpReader.cs" />
+    <Compile Include="HttpUtility\HttpClientPool.cs" />
+    <Compile Include="HttpUtility\HttpResult.cs" />
     <Compile Include="IdCollection.cs" />
+    <Compile Include="Lazy.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
-    <Compile Include="Mutex\TestMutex.cs" />
+    <Compile Include="ObjectPool.cs" />
     <Compile Include="Timer\CrestronTimer.cs" />
     <Compile Include="Emailer.cs" />
     <Compile Include="HashCollection.cs" />
@@ -92,28 +92,28 @@
     <Compile Include="IndexedDictionary.cs" />
     <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tuple\System.Collections\IStructuralComparable.cs">
+    <Compile Include="Microsoft\System.Collections\IStructuralComparable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\System.Collections\IStructuralEquatable.cs">
+    <Compile Include="Microsoft\System.Collections\IStructuralEquatable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\System.Numerics.Hashing\HashHelpers.cs">
+    <Compile Include="Microsoft\System.Numerics.Hashing\HashHelpers.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\System.Runtime.CompilerServices\ITuple.cs">
+    <Compile Include="Microsoft\System.Runtime.CompilerServices\ITuple.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\System.Runtime.CompilerServices\TupleElementNamesAttribute.cs">
+    <Compile Include="Microsoft\System.Runtime.CompilerServices\TupleElementNamesAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\Tuple.cs">
+    <Compile Include="Microsoft\System.Tuple\Tuple.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\TupleExtensions.cs">
+    <Compile Include="Microsoft\System.Tuple\TupleExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tuple\ValueTuple.cs">
+    <Compile Include="Microsoft\System.Tuple\ValueTuple.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TxQueue.cs" />

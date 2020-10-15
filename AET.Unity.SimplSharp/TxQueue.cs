@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using AET.Unity.SimplSharp.Timer;
-using Crestron.SimplSharp;
 
 namespace AET.Unity.SimplSharp {
   public class TxQueue<T> {
-    private Queue<T> queue = new Queue<T>();
-    private Action<T> txAction;
+    private readonly Queue<T> queue = new Queue<T>();
+    private readonly Action<T> txAction;
     private ITimer timer;
 
     public TxQueue(Action<T> txAction, int spaceBetweenCommandsMs) {
@@ -23,6 +19,7 @@ namespace AET.Unity.SimplSharp {
 
     public IMutex Mutex { get; set; }
     public IMutex ActionMutex { get; set; }
+
     public ITimer Timer {
       get { return timer; }
       set {
@@ -30,6 +27,7 @@ namespace AET.Unity.SimplSharp {
         timer.TimerCallback = TimerCallback;
       }
     }
+
     #endregion
 
     /// <summary>
@@ -46,15 +44,16 @@ namespace AET.Unity.SimplSharp {
       queue.Enqueue(value);
       TriggerSend();
       Mutex.Exit();
-    }    
+    }
 
     private void TriggerSend() {
       if (queue.Count == 0) return;
       if (Timer.IsRunning) return;
       txAction(queue.Peek());
-      if(SpaceBetweenCommandsMs > 0) Timer.Start(SpaceBetweenCommandsMs);
+      if (SpaceBetweenCommandsMs > 0) Timer.Start(SpaceBetweenCommandsMs);
       else TimerCallback();
     }
+
     private void TimerCallback() {
       Mutex.Enter();
       queue.Dequeue();

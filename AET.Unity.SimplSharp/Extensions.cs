@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
-using Crestron.SimplSharp;
-
 
 namespace AET.Unity.SimplSharp {
   public static class Extensions {
@@ -15,12 +12,14 @@ namespace AET.Unity.SimplSharp {
       if (value == null) return 0;
       double valueDouble;
       var valueBytes = Encoding.ASCII.GetBytes(value.Trim());
-      if (Microsoft.Xml.XmlConverter.TryParseDouble(valueBytes, 0, valueBytes.Length, out valueDouble)) return valueDouble;
+      if (Microsoft.Xml.XmlConverter.TryParseDouble(valueBytes, 0, valueBytes.Length, out valueDouble))
+        return valueDouble;
       return 0;
     }
+
     /// <summary>
-        /// Parses a string to an Int. Returns 0 if anything goes wrong (i.e. null, not integer, etc).
-        /// </summary>
+    /// Parses a string to an Int. Returns 0 if anything goes wrong (i.e. null, not integer, etc).
+    /// </summary>
     public static int SafeParseInt(this string value) {
       return Convert.ToInt32(Math.Round(SafeParseDouble(value)));
     }
@@ -35,24 +34,27 @@ namespace AET.Unity.SimplSharp {
     /// <summary>
     /// Parses a string to DateTime. Returns DateTime.MinValue if anything goes wrong.
     /// </summary>
-
     public static DateTime SafeParseDateTime(this string value) {
       if (String.IsNullOrEmpty(value)) return new DateTime();
       try {
         return DateTime.Parse(value);
-      } catch {
+      }
+      catch {
         return DateTime.MinValue;
       }
     }
 
-    public static T SafeParseEnum<T>(this string value) where T : struct, IConvertible { // constraint "struct, IConvertible" because System.Enum is not allowed until C# 7
+    public static T SafeParseEnum<T>(this string value) where T : struct, IConvertible {
+      // constraint "struct, IConvertible" because System.Enum is not allowed until C# 7
       if (String.IsNullOrEmpty(value)) {
         ErrorMessage.Warn("Tried to parse Enum '{0}' from a null/empty value.", typeof(T).Name);
         return default(T);
       }
+
       try {
-        return (T)Enum.Parse(typeof(T), value, true);
-      } catch {
+        return (T) Enum.Parse(typeof(T), value, true);
+      }
+      catch {
         ErrorMessage.Warn("Tried to parse Enum '{0}', but value '{1}' not found.", typeof(T).Name, value);
         return default(T);
       }
@@ -95,7 +97,7 @@ namespace AET.Unity.SimplSharp {
     /// Converts a bool to a ushort.
     /// </summary>
     public static ushort ToUshort(this bool value) {
-      return (ushort)(value ? 1 : 0);
+      return (ushort) (value ? 1 : 0);
     }
 
     public static ushort ToUshort(this bool? value) {
@@ -107,10 +109,11 @@ namespace AET.Unity.SimplSharp {
     /// </summary>
     public static bool IsNullOrWhiteSpace(this string value) {
       if (value == null) return true;
-      for (int index = 0; index < value.Length; ++index) {
-        if (!char.IsWhiteSpace(value[index]))
+      foreach (var c in value) {
+        if (!char.IsWhiteSpace(c))
           return false;
       }
+
       return true;
     }
 
@@ -118,7 +121,8 @@ namespace AET.Unity.SimplSharp {
       try {
         var parser = new CsvParser();
         return parser.ParseLine(value);
-      } catch (Exception ex) {
+      }
+      catch (Exception ex) {
         ErrorMessage.Warn("Error Unity.SimplSharp ParseCsv({0}): {1}", value, ex.Message);
         return new List<string>();
       }
@@ -133,8 +137,17 @@ namespace AET.Unity.SimplSharp {
       for (i = 0; i < value.Length - 1; i++) {
         s += value[i] + ", ";
       }
+
       s += "or " + value[i];
       return s;
+    }
+
+    public static string[] SplitAndTrim(this string text, char separator) {
+      if (text.IsNullOrWhiteSpace()) {
+        return null;
+      }
+
+      return text.Split(separator).Select(t => t.Trim()).ToArray();
     }
   }
 }

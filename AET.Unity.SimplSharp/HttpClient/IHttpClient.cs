@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace AET.Unity.SimplSharp.HttpClient {
   public interface IHttpClient {
-    void PostAsync(string url, string contents);
 
-    void PostAsync(string url, string contents, Action<string> callbackAction);
+    string Post(string url, string contents);
 
-    void Post(string url, string contents);
-
-    void Post(string url, string contents, Action<string> response);
+    string Post(string url, string contents, IEnumerable<KeyValuePair<string, string>> additionalHeaders);
 
     string Get(string url);
 
-    void GetAsync(string url, Action<string> callbackAction);
+    string Get(string url, IEnumerable<KeyValuePair<string, string>> additionalHeaders);
 
     ushort Debug { get; set; }
   }

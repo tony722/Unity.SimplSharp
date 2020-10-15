@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Crestron.SimplSharp.CrestronIO;
+﻿using Crestron.SimplSharp.CrestronIO;
 
 namespace AET.Unity.SimplSharp.FileIO {
   public class CrestronFileIO : IFileIO {
     public string ReadAllText(string fileName) {
-      var file =  File.OpenText(fileName);
+      var file = File.OpenText(fileName);
       string contents = file.ReadToEnd();
       file.Close();
       return contents;
