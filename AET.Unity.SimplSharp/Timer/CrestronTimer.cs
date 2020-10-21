@@ -7,8 +7,8 @@ namespace AET.Unity.SimplSharp.Timer {
 
     private CTimer timer = null;
 
-    public Action TimerCallback { private get; set; }
-    public bool IsRunning { get; private set; }
+    public override Action TimerCallback { protected get; set; }
+    public override bool IsRunning { get; protected set; }
     public long TimeoutMs { get; set; }
 
     public void Start() {
@@ -17,13 +17,17 @@ namespace AET.Unity.SimplSharp.Timer {
       timer = new CTimer(CTimerCallback, TimeoutMs);
     }
 
-    public void Start(long timeoutMs) {
+    public override void Start(long timeoutMs) {
       TimeoutMs = timeoutMs;
       Start();
     }
 
-    public void Restart() {
+    public override void Restart() {
       Start();
+    }
+
+    public override void Dispose() {
+      timer.Dispose();
     }
 
     private void CTimerCallback(object o) {

@@ -2,20 +2,22 @@
 
 namespace AET.Unity.SimplSharp.Timer {
   public class TestTimer : ITimer {
-    public Action TimerCallback { private get; set; }
 
-    public bool IsRunning { get; private set; }
+    public override Action TimerCallback { protected get; set; }
+    
+    public override bool IsRunning { get; protected set; }
 
     public bool ElapseImmediately { get; set; }
     public long TimeoutMs { get; private set; }
 
-    public void Start(long timeoutMs) {
+    public override void Start(long timeoutMs) {
       IsRunning = true;
       TimeoutMs = timeoutMs;
       if (ElapseImmediately) TimerElapsed();
     }
 
-    public void Restart() { }
+    public override void Restart() { }
+    public override void Dispose() { }
 
     public void TimerElapsed() {
       if (!IsRunning) return;
