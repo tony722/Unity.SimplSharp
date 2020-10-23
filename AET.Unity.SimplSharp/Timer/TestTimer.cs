@@ -2,8 +2,9 @@
 
 namespace AET.Unity.SimplSharp.Timer {
   public class TestTimer : ITimer {
+    private object callbackObject;
 
-    public override Action TimerCallback { protected get; set; }
+    public override Action<object> TimerCallback { protected get; set; }
     
     public override bool IsRunning { get; protected set; }
 
@@ -11,8 +12,13 @@ namespace AET.Unity.SimplSharp.Timer {
     public long TimeoutMs { get; private set; }
 
     public override void Start(long timeoutMs) {
+      Start(timeoutMs, null);
+    }
+
+    public override void Start(long timeoutMs, object callbackObject) {
       IsRunning = true;
       TimeoutMs = timeoutMs;
+      this.callbackObject = callbackObject;
       if (ElapseImmediately) TimerElapsed();
     }
 
@@ -22,7 +28,7 @@ namespace AET.Unity.SimplSharp.Timer {
     public void TimerElapsed() {
       if (!IsRunning) return;
       IsRunning = false;
-      TimerCallback();
+      TimerCallback(callbackObject);
     }
   }
 }

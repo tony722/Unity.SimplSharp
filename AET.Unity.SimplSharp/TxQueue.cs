@@ -51,10 +51,10 @@ namespace AET.Unity.SimplSharp {
       if (Timer.IsRunning) return;
       txAction(queue.Peek());
       if (SpaceBetweenCommandsMs > 0) Timer.Start(SpaceBetweenCommandsMs);
-      else TimerCallback();
+      else TimerCallback(null);
     }
 
-    private void TimerCallback() {
+    private void TimerCallback(object o) {
       Mutex.Enter();
       queue.Dequeue();
       TriggerSend();
