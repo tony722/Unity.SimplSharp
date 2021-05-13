@@ -65,20 +65,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
+    <Compile Include="Concurrent\ConcurrentDictionary.cs" />
+    <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\ErrorMessage.cs" />
     <Compile Include="ErrorMessage\IErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\TestErrorMessageHandler.cs" />
-    <Compile Include="Extensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Extensions\ParsingAndConversionExtensions.cs" />
     <Compile Include="FileIO\CrestronFileIO.cs" />
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />
     <Compile Include="HttpUtility\HttpResult.cs" />
+    <Compile Include="Http\CrestronHttpReader.cs" />
+    <Compile Include="Http\IHttpReader.cs" />
     <Compile Include="IdCollection.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />

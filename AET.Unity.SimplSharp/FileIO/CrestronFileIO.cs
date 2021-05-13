@@ -1,12 +1,18 @@
-﻿using Crestron.SimplSharp.CrestronIO;
+﻿using System.Runtime.CompilerServices;
+using Crestron.SimplSharp.CrestronIO;
 
 namespace AET.Unity.SimplSharp.FileIO {
   public class CrestronFileIO : IFileIO {
     public string ReadAllText(string fileName) {
       var file = File.OpenText(fileName);
-      string contents = file.ReadToEnd();
+      var contents = file.ReadToEnd();
       file.Close();
       return contents;
+    }
+
+    public bool Exists(string fileName) {
+      if (fileName.IsNullOrWhiteSpace()) return false;
+      return File.Exists(fileName);
     }
 
     public void WriteText(string fileName, string data) {

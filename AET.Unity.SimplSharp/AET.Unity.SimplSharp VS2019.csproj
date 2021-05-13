@@ -66,8 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnyKeyDictionary.cs" />
+    <Compile Include="Concurrent\ConcurrentList.cs" />
+    <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Extensions\ParsingAndConversionExtensions.cs" />
+    <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="FileIO\CrestronFileIO.cs" />
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="FileIO\TestFileIO.cs" />
@@ -76,6 +81,7 @@
     <Compile Include="HttpClient\TestHttpClient.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />
     <Compile Include="HttpUtility\HttpResult.cs" />
+    <Compile Include="IIndexers.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="Microsoft\System.Collections\IStructuralComparable.cs" />
     <Compile Include="Microsoft\System.Collections\IStructuralEquatable.cs" />
@@ -94,7 +100,7 @@
     <Compile Include="TxQueue.cs" />
     <Compile Include="IdCollection.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HashCollection.cs" />
     <Compile Include="ErrorMessage\IErrorMessageHandler.cs" />

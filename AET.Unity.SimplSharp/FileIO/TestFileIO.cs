@@ -9,5 +9,10 @@ namespace AET.Unity.SimplSharp.FileIO {
     public void WriteText(string fileName, string data) {
       File.WriteAllText(fileName, data);
     }
+
+    public bool Exists(string fileName) {
+      if (fileName.IsNullOrWhiteSpace()) return false;
+      return File.Exists(fileName);
+    }
   }
 }

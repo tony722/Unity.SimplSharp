@@ -2,12 +2,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AET.SimplSharp.Tests")]
+[assembly: AssemblyTitle("AET.Unity.SimplSharp.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("AET.SimplSharp.Tests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyProduct("AET.Unity.SimplSharp.Tests")]
+[assembly: AssemblyCopyright("Copyright © Anthony Evert")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

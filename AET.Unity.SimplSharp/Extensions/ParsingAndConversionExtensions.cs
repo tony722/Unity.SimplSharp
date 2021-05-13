@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace AET.Unity.SimplSharp {
-  public static class Extensions {
+  public static class ParsingAndConversionExtensions {
     /// <summary>
     /// Parses a string to an Int. Returns 0 if anything goes wrong (i.e. null, not integer, etc).
     /// </summary>
@@ -35,26 +35,24 @@ namespace AET.Unity.SimplSharp {
     /// Parses a string to DateTime. Returns DateTime.MinValue if anything goes wrong.
     /// </summary>
     public static DateTime SafeParseDateTime(this string value) {
-      if (String.IsNullOrEmpty(value)) return new DateTime();
+      if (string.IsNullOrEmpty(value)) return new DateTime();
       try {
         return DateTime.Parse(value);
-      }
-      catch {
+      } catch {
         return DateTime.MinValue;
       }
     }
 
     public static T SafeParseEnum<T>(this string value) where T : struct, IConvertible {
       // constraint "struct, IConvertible" because System.Enum is not allowed until C# 7
-      if (String.IsNullOrEmpty(value)) {
+      if (string.IsNullOrEmpty(value)) {
         ErrorMessage.Warn("Tried to parse Enum '{0}' from a null/empty value.", typeof(T).Name);
         return default(T);
       }
 
       try {
-        return (T) Enum.Parse(typeof(T), value, true);
-      }
-      catch {
+        return (T)Enum.Parse(typeof(T), value, true);
+      } catch {
         ErrorMessage.Warn("Tried to parse Enum '{0}', but value '{1}' not found.", typeof(T).Name, value);
         return default(T);
       }
@@ -97,57 +95,11 @@ namespace AET.Unity.SimplSharp {
     /// Converts a bool to a ushort.
     /// </summary>
     public static ushort ToUshort(this bool value) {
-      return (ushort) (value ? 1 : 0);
+      return (ushort)(value ? 1 : 0);
     }
 
     public static ushort ToUshort(this bool? value) {
       return ToUshort(value ?? false);
-    }
-
-    /// <summary>
-    /// True if string contains only whitespace characters, or is null
-    /// </summary>
-    public static bool IsNullOrWhiteSpace(this string value) {
-      if (value == null) return true;
-      foreach (var c in value) {
-        if (!char.IsWhiteSpace(c))
-          return false;
-      }
-
-      return true;
-    }
-
-    public static IList<string> ParseCsv(this string value) {
-      try {
-        var parser = new CsvParser();
-        return parser.ParseLine(value);
-      }
-      catch (Exception ex) {
-        ErrorMessage.Warn("Error Unity.SimplSharp ParseCsv({0}): {1}", value, ex.Message);
-        return new List<string>();
-      }
-    }
-
-    public static string FormatAsList<T>(this T[] value) {
-      if (value == null) return null;
-      if (value.Length == 1) return string.Format("{0}", value[0]);
-      if (value.Length == 2) return String.Format("{0} or {1}", value[0], value[1]);
-      string s = "";
-      int i;
-      for (i = 0; i < value.Length - 1; i++) {
-        s += value[i] + ", ";
-      }
-
-      s += "or " + value[i];
-      return s;
-    }
-
-    public static string[] SplitAndTrim(this string text, char separator) {
-      if (text.IsNullOrWhiteSpace()) {
-        return null;
-      }
-
-      return text.Split(separator).Select(t => t.Trim()).ToArray();
     }
   }
 }

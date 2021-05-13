@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Unity.SimplSharp.Tests {
+namespace AET.Unity.SimplSharp.Tests {
   [TestClass]
   public class AnyKeyDictionaryTests {
     [TestMethod]

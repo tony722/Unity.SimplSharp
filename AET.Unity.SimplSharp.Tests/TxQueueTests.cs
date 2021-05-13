@@ -7,13 +7,13 @@ using AET.Unity.SimplSharp.Timer;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Unity.SimplSharp.Tests {
+namespace AET.Unity.SimplSharp.Tests {
   [TestClass]
   public class TxQueueTests {
     [TestMethod]
     public void TxQueueIntegrationTest() {
       var tx = new List<string>();
-      var queue = new TxQueue((s) => tx.Add(s),1);
+      var queue = new TxQueue<string>((s) => tx.Add(s),1);
       var timer = new TestTimer();
       queue.Mutex = new TestMutex();
       queue.Timer = timer;
