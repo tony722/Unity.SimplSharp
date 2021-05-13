@@ -21,5 +21,9 @@ namespace AET.Unity.SimplSharp {
     public static bool IsPm(this TimeSpan timeSpan) {
       return !timeSpan.IsAm();
     }
+
+    public static TimeSpan To24HourTimeSpan(this TimeSpan timeSpan) {
+      return timeSpan.TotalMinutes < 0 ? TimeSpan.FromMinutes((timeSpan.TotalMinutes % 1440) + 1440) : TimeSpan.FromMinutes(timeSpan.TotalMinutes % 1440);
+    }
   }
 }

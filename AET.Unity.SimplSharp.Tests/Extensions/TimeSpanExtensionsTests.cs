@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using FluentAssertions;
 
 namespace AET.Unity.SimplSharp.Tests.Extensions {
   [TestClass]
@@ -21,7 +21,6 @@ namespace AET.Unity.SimplSharp.Tests.Extensions {
     [DataRow(16, 4)]
     [DataRow(20, 8)]
     [DataRow(23, 11)]
-    [TestMethod]
     public void Hours12_CalculatesHourCorrectly(int hour24, int hour12) {
       var time = TimeSpan.FromHours(hour24);
       time.Hours12().Should().Be(hour12);
@@ -45,12 +44,22 @@ namespace AET.Unity.SimplSharp.Tests.Extensions {
     [DataRow(18)]
     [DataRow(20)]
     [DataRow(23)]
-    [TestMethod]
     public void IsAm_HourIsPm_ReturnsTrue(int hour24) {
       var time = TimeSpan.FromHours(hour24);
       time.IsAm().Should().BeFalse();
       time.IsPm().Should().BeTrue();
     }
 
+    [DataTestMethod]
+    [DataRow("0:00:00", -15, "23:45:00")]
+    [DataRow("0:00:00", 15, "00:15:00")]
+    [DataRow("0:00:00", -1455, "23:45:00")]
+    [DataRow("0:00:00", 1455, "00:15:00")]
+    [DataRow("0:15:00", -15, "00:00:00")]
+    [DataRow("23:45:00", 15, "00:00:00")]
+    public void To24HourTimeSpan_CalculatesCorrectResult(string startTime, int interval, string expectedTime) {
+      var time = TimeSpan.Parse(startTime).Add(TimeSpan.FromMinutes(interval));
+      time.To24HourTimeSpan().Should().Be(TimeSpan.Parse(expectedTime));
+    }
   }
 }
