@@ -68,7 +68,12 @@
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
+    <Compile Include="Concurrent\ConcurrentSortedList.cs" />
     <Compile Include="CsvParser.cs" />
+    <Compile Include="DateTimeProvider\CrestronDateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\DateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\IDateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\TestDateTimeProvider.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Extensions\ParsingAndConversionExtensions.cs" />
@@ -81,6 +86,9 @@
     <Compile Include="HttpClient\TestHttpClient.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />
     <Compile Include="HttpUtility\HttpResult.cs" />
+    <Compile Include="Http\CrestronHttpReader.cs" />
+    <Compile Include="Http\IHttpReader.cs" />
+    <Compile Include="Http\TestHttpReader.cs" />
     <Compile Include="IIndexers.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="Microsoft\System.Collections\IStructuralComparable.cs" />

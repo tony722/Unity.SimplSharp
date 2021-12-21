@@ -10,6 +10,7 @@ namespace AET.Unity.SimplSharp.Timer {
     public override Action<object> TimerCallback { protected get; set; }
     public override bool IsRunning { get; protected set; }
     public long TimeoutMs { get; set; }
+    public long RepeatMs { get; set; }
 
     private void Start(object callbackObject) {
       if (timer != null && !timer.Disposed) timer.Dispose();
@@ -22,12 +23,24 @@ namespace AET.Unity.SimplSharp.Timer {
       Start(callbackObject);
     }
 
+    public override void Start(long timeoutMs, long repeatMs, object callbackObject) {
+      if (timer != null && !timer.Disposed) timer.Dispose();
+      TimeoutMs = timeoutMs;
+      RepeatMs = repeatMs;
+      IsRunning = true;
+      timer = new CTimer(CTimerCallback, callbackObject, timeoutMs, repeatMs);
+    }
+
     public override void Start(long timeoutMs) {
       Start(timeoutMs, null);
     }
 
     public override void Restart() {
-      Start(null);
+      timer.Reset();
+    }
+
+    public override void Stop() {
+      timer.Dispose();
     }
 
     public override void Dispose() {
@@ -36,7 +49,6 @@ namespace AET.Unity.SimplSharp.Timer {
 
     private void CTimerCallback(object o) {
       IsRunning = false;
-      timer.Dispose();
       TimerCallback(o);
     }
 

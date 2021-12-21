@@ -101,5 +101,23 @@ namespace AET.Unity.SimplSharp {
     public static ushort ToUshort(this bool? value) {
       return ToUshort(value ?? false);
     }
+
+    /// <summary>
+    /// Converts a string to a Version.
+    /// </summary>
+    public static Version SafeParseVersion(this string version) {
+      if (version.IsNullOrWhiteSpace()) return new Version(0, 0, 0);
+      var parts = version.MakeVersionParts();
+      if (parts.Length == 1) return new Version(parts[0], 0, 0);
+      if (parts.Length == 2) return new Version(parts[0], parts[1], 0);
+      return new Version(parts[0], parts[1], parts[2]);
+    }
+
+    private static int[] MakeVersionParts(this string value) {
+      var parts = value.Split('.');
+      var intParts = parts.Select(p => p.SafeParseInt()).ToArray();
+      return intParts;
+    }
+
   }
 }

@@ -68,6 +68,10 @@
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="CsvParser.cs" />
+    <Compile Include="DateTimeProvider\CrestronDateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\DateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\IDateTimeProvider.cs" />
+    <Compile Include="DateTimeProvider\TestDateTimeProvider.cs" />
     <Compile Include="ErrorMessage\CrestronErrorMessageHandler.cs" />
     <Compile Include="ErrorMessage\ErrorMessage.cs" />
     <Compile Include="ErrorMessage\IErrorMessageHandler.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Extensions\ParsingAndConversionExtensions.cs" />
+    <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="FileIO\CrestronFileIO.cs" />
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />

@@ -25,6 +25,7 @@ namespace AET.Unity.SimplSharp.Tests.Extensions {
       var time = TimeSpan.FromHours(hour24);
       time.Hours12().Should().Be(hour12);
     }
+
     [DataTestMethod]
     [DataRow(0)]
     [DataRow(1)]

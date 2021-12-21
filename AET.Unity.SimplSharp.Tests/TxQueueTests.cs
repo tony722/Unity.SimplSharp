@@ -21,6 +21,7 @@ namespace AET.Unity.SimplSharp.Tests {
 
       var commandsToSend = new string[] {"tx1", "tx2", "tx3", "tx4"};
       Parallel.ForEach(commandsToSend, (c) => queue.Send(c));
+      Thread.Sleep(10);
       tx.Count.Should().Be(4);
       tx.Should().Contain(commandsToSend);
     }

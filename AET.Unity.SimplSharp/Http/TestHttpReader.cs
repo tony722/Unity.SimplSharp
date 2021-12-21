@@ -2,7 +2,7 @@
 using System.Net;
 
 namespace AET.Unity.SimplSharp.Http {
-  class TestHttpReader : IHttpReader {
+  public class TestHttpReader : IHttpReader {
     public string GetHttpsText(string url) {
       using (var httpClient = new System.Net.Http.HttpClient()) {
         System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;

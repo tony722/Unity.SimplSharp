@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\TimeSpanExtensionsTests.cs" />
+    <Compile Include="Extensions\SafeParseVersionTests.cs" />
     <Compile Include="UniqueValueIndexedDictionaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AnyKeyDictionaryTests.cs" />

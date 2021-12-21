@@ -6,7 +6,9 @@ namespace AET.Unity.SimplSharp.Timer {
     public abstract bool IsRunning { get; protected set; }
     public abstract void Start(long timeoutMs);
     public abstract void Start(long timeoutMs, object callbackObject);
+    public abstract void Start(long timeoutMs, long repeatMs, object callbackObject);
     public abstract void Restart();
+    public abstract void Stop();
     public abstract void Dispose();
   }
 }
