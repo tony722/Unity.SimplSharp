@@ -10,5 +10,8 @@ namespace AET.Unity.SimplSharp.DateTimeProvider {
       get { return DateTime.Today; }
     }
 
+    public TimeSpan TimeOfDay {
+      get { return DateTime.Now.TimeOfDay; }
+    }
   }
 }

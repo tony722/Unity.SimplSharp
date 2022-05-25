@@ -67,6 +67,7 @@
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
+    <Compile Include="Concurrent\ConcurrentSortedList.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="DateTimeProvider\CrestronDateTimeProvider.cs" />
     <Compile Include="DateTimeProvider\DateTimeProvider.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
     <Compile Include="ObjectPool.cs" />
+    <Compile Include="PressHoldRepeater.cs" />
     <Compile Include="Timer\CrestronTimer.cs" />
     <Compile Include="Emailer.cs" />
     <Compile Include="HashCollection.cs" />

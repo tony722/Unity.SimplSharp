@@ -3,6 +3,8 @@
 namespace AET.Unity.SimplSharp {
   public delegate void TriggerDelegate();
 
+  public delegate void TriggerArrayDelegate(ushort index);
+
   public delegate void SetUshortOutputArrayDelegate(ushort index, ushort value);
 
   public delegate void SetAllUshortOutputArrayDelegate(ushort value);

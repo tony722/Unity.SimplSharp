@@ -5,10 +5,15 @@ using System.Collections.Generic;
 namespace AET.Unity.SimplSharp {
   public class IndexedDictionary<TKey, TValue> : IEnumerable<TValue> {
     private readonly List<TValue> list = new List<TValue>();
-    private readonly Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+    private readonly Dictionary<TKey, TValue> dict;
 
     private readonly Object mutex = new Object();
-
+    public IndexedDictionary() { 
+      dict = new Dictionary<TKey, TValue>();
+    }
+    public IndexedDictionary(IEqualityComparer<TKey> comparer) {
+      dict = new Dictionary<TKey, TValue>(comparer);
+    }
     public TValue this[int index] {
       get { return list[index]; }
     }

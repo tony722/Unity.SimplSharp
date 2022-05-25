@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90BD5C23-A2CA-4B45-B300-DF21F41F2C11}</ProjectGuid>
+    <ProjectGuid>{9727A743-5F36-49E7-A85F-DBD55379ABF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AET.Unity.SimplSharp</RootNamespace>

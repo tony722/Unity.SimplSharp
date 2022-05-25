@@ -20,7 +20,11 @@ namespace AET.Unity.SimplSharp.DateTimeProvider {
 
     public static DateTime Today {
       get { return TimeProvider.Today; }
-    } 
+    }
+
+    public static TimeSpan TimeOfDay {
+      get { return TimeProvider.TimeOfDay;  }
+    }
 
   }
 }

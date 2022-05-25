@@ -13,7 +13,11 @@ namespace AET.Unity.SimplSharp.Timer {
     public long RepeatMs { get; private set; }
 
     public override void Start(long timeoutMs) {
-      Start(timeoutMs, null);
+      Start(timeoutMs, (object)null);
+    }
+
+    public override void Start(long timeoutMs, long repeatMs) {
+      Start(timeoutMs, repeatMs, (object)null);
     }
 
     public override void Start(long timeoutMs, object callbackObject) {
@@ -29,6 +33,16 @@ namespace AET.Unity.SimplSharp.Timer {
       RepeatMs = repeatMs;
       this.callbackObject = callbackObject;
       if (ElapseImmediately) TimerElapsed();
+    }
+
+    public override void Start(long timeout, Action<object> timerCallback) {
+      TimerCallback = timerCallback;
+      Start(TimeoutMs);
+    }
+
+    public override void Start(long timeoutMs, long repeatMs, Action<object> timerCallback) {
+      TimerCallback = timerCallback;
+      Start(timeoutMs, repeatMs, (object)null);
     }
 
     public override void Restart() {

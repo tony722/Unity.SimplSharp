@@ -15,5 +15,9 @@ namespace AET.Unity.SimplSharp.DateTimeProvider {
         return new DateTime(TestDateTime.Year, TestDateTime.Month, TestDateTime.Day);
       }
     }
+
+    public TimeSpan TimeOfDay {
+      get { return TestDateTime.TimeOfDay;  }
+    }
   }
 }
