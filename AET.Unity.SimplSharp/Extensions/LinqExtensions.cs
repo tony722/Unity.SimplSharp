@@ -22,5 +22,13 @@ namespace AET.Unity.SimplSharp {
         }
       }
     }
+
+    public static IEnumerable<V> GetValues<K, V>(this IDictionary<K, V> dict, IEnumerable<K> keys) {
+      return keys.Select((x) => dict[x]);
+    }
+
+    public static IEnumerable<V> GetValues<K, V>(this AnyKeyDictionary<K, V> dict, IEnumerable<K> keys) {
+      return keys.Select((x) => dict[x]);
+    }
   }
 }

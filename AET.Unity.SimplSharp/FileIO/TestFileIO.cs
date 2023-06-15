@@ -3,11 +3,15 @@
 namespace AET.Unity.SimplSharp.FileIO {
   public class TestFileIO : IFileIO {
     public string ReadAllText(string fileName) {
+      if (!SimulatedFileContents.IsNullOrWhiteSpace()) return SimulatedFileContents;
       return File.ReadAllText(fileName);
     }
 
+    public string SimulatedFileContents { get; set; }
+
     public void WriteText(string fileName, string data) {
-      File.WriteAllText(fileName, data);
+      if (!SimulatedFileContents.IsNullOrWhiteSpace()) SimulatedFileContents = data;
+      else File.WriteAllText(fileName, data);
     }
 
     public void WriteText(string fileName, string data, bool useVersioning) {
@@ -15,6 +19,7 @@ namespace AET.Unity.SimplSharp.FileIO {
     }
 
     public bool Exists(string fileName) {
+      if (!SimulatedFileContents.IsNullOrWhiteSpace()) return true;
       if (fileName.IsNullOrWhiteSpace()) return false;
       return File.Exists(fileName);
     }

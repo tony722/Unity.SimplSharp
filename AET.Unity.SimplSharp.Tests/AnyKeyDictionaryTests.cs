@@ -7,13 +7,13 @@ namespace AET.Unity.SimplSharp.Tests {
   public class AnyKeyDictionaryTests {
     [TestMethod]
     public void IntDictionary_RequestValueForKeyThatDoesNotExist_Returns0() {
-      var d = new AnyIndexDictionary<string, int>();
+      var d = new AnyKeyDictionary<string, int>();
       d["Nothing Here"].Should().Be(0);
     }
 
     [TestMethod]
     public void IntDictionary_RequestValueForExisingKey_CorrectValueReturned() {
-      var d = new AnyIndexDictionary<string, int>();
+      var d = new AnyKeyDictionary<string, int>();
       d["hello"] = 40;  //No add needed, auto-creates kvp
       d["hello"] = 45;  //Updates first kvp
       d["hello"].Should().Be(45);
@@ -21,7 +21,7 @@ namespace AET.Unity.SimplSharp.Tests {
 
     [TestMethod]
     public void StringDictionary_RequestValueForNonExistentKey_ReturnsNull() {
-      var d = new AnyIndexDictionary<string, string>();
+      var d = new AnyKeyDictionary<string, string>();
       d["Nothing Here"].Should().BeNull();
     }
   }

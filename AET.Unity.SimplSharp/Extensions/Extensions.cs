@@ -55,5 +55,20 @@ namespace AET.Unity.SimplSharp {
 
       return text.Split(separator).Select(t => t.Trim()).ToArray();
     }
+    /// <summary>
+    /// Limits the range of the number to min and max
+    /// </summary>
+    public static int Clamp(this int value, int min, int max) {
+      return (value < min) ? min : (value > max) ? max : value;
+    }
+
+    public static short Clamp(this short value, int min, int max) {
+      int v2 = value;
+      return (short)v2.Clamp(min, max);
+    }
+    public static ushort Clamp(this ushort value, int min, int max) {
+      int v2 = value;
+      return (ushort)v2.Clamp(min, max);
+    }
   }
 }

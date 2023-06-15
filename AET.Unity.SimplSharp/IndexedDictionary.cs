@@ -7,7 +7,7 @@ namespace AET.Unity.SimplSharp {
     private readonly List<TValue> list = new List<TValue>();
     private readonly Dictionary<TKey, TValue> dict;
 
-    private readonly Object mutex = new Object();
+    private readonly object mutex = new object();
     public IndexedDictionary() { 
       dict = new Dictionary<TKey, TValue>();
     }

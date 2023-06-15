@@ -10,17 +10,21 @@ namespace AET.Unity.SimplSharp {
   /// </summary>
   /// <typeparam name="TKey"></typeparam>
   /// <typeparam name="TValue"></typeparam>
-  public class AnyIndexDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> {
+  public class AnyKeyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> {
     private readonly ConcurrentDictionary<TKey, TValue> dict = new ConcurrentDictionary<TKey, TValue>();
 
-    public AnyIndexDictionary() { }
+    public AnyKeyDictionary() { }
 
     public event EventHandler<SetValueEventArgs> OnSetValue;
     
-    public AnyIndexDictionary(IList<TKey> keys, IList<TValue> values) {
+    public AnyKeyDictionary(IList<TKey> keys, IList<TValue> values) {
       for (var i = 0; i < keys.Count; i++) {
         this[keys[i]] = values[i];
       }
+    }
+
+    public void Clear() {
+      dict.Clear();
     }
 
     public TValue this[TKey key] {

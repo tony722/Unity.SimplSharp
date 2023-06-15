@@ -13,3 +13,6 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1005:Delegate invocation can be simplified.", Justification = "<Pending>", Scope = "member", Target = "~M:AET.Unity.SimplSharp.TestErrorMessageHandler.WriteErrorMessage(System.String,System.String)")]
 [assembly: SuppressMessage("Style", "IDE0034:Simplify 'default' expression", Justification = "<Pending>", Scope = "member", Target = "~P:AET.Unity.SimplSharp.AnyIndexDictionary`2.Item(`0)")]
 [assembly: SuppressMessage("Style", "IDE0018:Inline variable declaration", Justification = "<Pending>", Scope = "member", Target = "~P:AET.Unity.SimplSharp.AnyIndexDictionary`2.Item(`0)")]
+[assembly: SuppressMessage("Style", "IDE0018:Inline variable declaration", Justification = "<Pending>", Scope = "member", Target = "~P:AET.Unity.SimplSharp.AnyKeyDictionary`2.Item(`0)")]
+[assembly: SuppressMessage("Style", "IDE0034:Simplify 'default' expression", Justification = "<Pending>", Scope = "member", Target = "~P:AET.Unity.SimplSharp.AnyKeyDictionary`2.Item(`0)")]
+[assembly: SuppressMessage("Style", "IDE1005:Delegate invocation can be simplified.", Justification = "<Pending>", Scope = "member", Target = "~P:AET.Unity.SimplSharp.AnyKeyDictionary`2.Item(`0)")]

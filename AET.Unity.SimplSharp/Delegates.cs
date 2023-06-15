@@ -33,5 +33,7 @@ namespace AET.Unity.SimplSharp {
 
   public delegate ushort GetUshortOutputDelegate();
 
+  public delegate ushort GetUshortInputArrayDelegate(ushort index);
+
   public delegate ushort GetUshortOutputArrayDelegate(ushort index);
 }

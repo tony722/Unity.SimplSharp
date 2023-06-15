@@ -15,18 +15,18 @@ namespace AET.Unity.SimplSharp {
     internal ITimer DelayTimer { get; set; }
     internal ITimer RepeatTimer { get; set; }
 
-    public long DelayTime { get; set; }
-    public long RepeatTime { get; set; }
+    public long DelayTimeMs { get; set; }
+    public long RepeatTimeMs { get; set; }
 
     public Action Action { get; set; }
 
     public void Press() {
-      DelayTimer.Start(DelayTime);
+      DelayTimer.Start(DelayTimeMs);
     }
 
     private void StartRepeating(object o) {
       Action();
-      RepeatTimer.Start(RepeatTime, RepeatTime, null);
+      RepeatTimer.Start(RepeatTimeMs, RepeatTimeMs, null);
     }
 
     private void Repeat(object o) {

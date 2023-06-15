@@ -58,6 +58,7 @@ namespace AET.Unity.SimplSharp.Timer {
     }
 
     public void TimerElapsed() {
+      IsRunning = false;
       TimerCallback(callbackObject);
     }
   }
