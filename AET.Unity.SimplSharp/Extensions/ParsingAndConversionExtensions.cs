@@ -79,6 +79,18 @@ namespace AET.Unity.SimplSharp {
     public static int ConvertHundredBaseTo16Bit(this int value) {
       return (value * 0xffff) / 100;
     }
+    public static ushort ConvertHundredBaseTo16Bit(this ushort value) {
+      return (ushort)ConvertHundredBaseTo16Bit((int)value);
+    }
+
+    public static int Convert16BitToHundredBase(this int value) {
+      return (((value + 1) * 100)/65535);
+    }
+
+    public static ushort Convert16BitToHundredBase(this ushort value) {
+      return (ushort)Convert16BitToHundredBase((int)value);
+    }
+
 
     /// <summary>
     /// Converts an int to a bool. Returns false if 0. Returns true if > zero.

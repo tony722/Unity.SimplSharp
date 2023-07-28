@@ -9,7 +9,7 @@ namespace AET.Unity.SimplSharp {
     private readonly Action<T> txAction;
     private ITimer timer;
     private readonly Dictionary<string, QueueItem> lowPriorityQueue = new Dictionary<string, QueueItem>();
-
+    private readonly AnyKeyDictionary<string, bool> lowPriorityQueueDisabled = new AnyKeyDictionary<string, bool>();
     public TxQueue(Action<T> txAction, int spaceBetweenCommandsMs) {
       this.txAction = txAction;
       SpaceBetweenCommandsMs = spaceBetweenCommandsMs;
@@ -45,8 +45,12 @@ namespace AET.Unity.SimplSharp {
       Send(value, SpaceBetweenCommandsMs);
     }
 
-    public void Send(T value, int spaceAfterCommand) {
-      var valToSend = new QueueItem(value, spaceAfterCommand);
+    public void Send(T value, int spaceAfterCommandMs) {
+      Send(value, 0, spaceAfterCommandMs);
+    }
+
+    public void Send(T value, int spaceBeforeCommandMs, int spaceAfterCommandMs) {
+      var valToSend = new QueueItem(value, spaceBeforeCommandMs, spaceAfterCommandMs);
       Mutex.Enter();
       queue.Enqueue(valToSend);
       TriggerSend();
@@ -64,7 +68,8 @@ namespace AET.Unity.SimplSharp {
     }
 
     public void SendLowPriority(T value, string category, int spaceAfterCommand) {
-      var valueToSend = new QueueItem(value, spaceAfterCommand);
+      if (lowPriorityQueueDisabled[category]) return;
+      var valueToSend = new QueueItem(value, 0, spaceAfterCommand);
       Mutex.Enter();
       if (Busy) {
         lowPriorityQueue[category] = valueToSend;
@@ -76,6 +81,15 @@ namespace AET.Unity.SimplSharp {
       Mutex.Exit();
     }
 
+    public void DisableLowPriorityQueue(string category) {
+      lowPriorityQueueDisabled[category] = true;
+      lowPriorityQueue.Remove(category);
+    }
+
+    public void EnableLowPriorityQueue(string category) {
+      lowPriorityQueueDisabled[category] = false;
+    }
+
     private void TriggerSend() {
       if (queue.Count == 0) {
         SendWaitingLowPriorityCommand();
@@ -83,6 +97,10 @@ namespace AET.Unity.SimplSharp {
       }
       if (Timer.IsRunning) return;
       var item = queue.Peek();
+      if (item.SpaceBeforeCommandMs > 0) {
+        Timer.Start(item.SpaceBeforeCommandMs);
+        return;
+      }
       txAction(item.Value);
       if (item.SpaceBetweenCommandsMs > 0) Timer.Start(item.SpaceBetweenCommandsMs);
       else TimerCallback(null);
@@ -93,24 +111,33 @@ namespace AET.Unity.SimplSharp {
       var firstKey = lowPriorityQueue.Keys.First();
       var value = lowPriorityQueue[firstKey];
       lowPriorityQueue.Remove(firstKey);
-      queue.Enqueue(value);
-      TriggerSend();
+      if (!lowPriorityQueueDisabled[firstKey]) {
+        queue.Enqueue(value);
+        TriggerSend();
+      }
     }
 
     private void TimerCallback(object o) {
       Mutex.Enter();
-      queue.Dequeue();
+      var item = queue.Peek();
+      if (item.SpaceBeforeCommandMs > 0) {
+        item.SpaceBeforeCommandMs = 0;
+      } else {
+        queue.Dequeue();
+      }
       TriggerSend();
       Mutex.Exit();
     }
 
     private class QueueItem {
-      public QueueItem(T value, int spaceBetweenCommandsMs) {
+      public QueueItem(T value, int spaceBeforeCommandMs, int spaceBetweenCommandsMs) {
         Value = value;
+        SpaceBeforeCommandMs = spaceBeforeCommandMs;
         SpaceBetweenCommandsMs = spaceBetweenCommandsMs;
       }
       public T Value { get; private set; }
       public int SpaceBetweenCommandsMs { get; private set; }
+      public int SpaceBeforeCommandMs { get; set; }
     }
   }
 }

@@ -34,6 +34,16 @@ namespace AET.Unity.SimplSharp.Tests {
     }
 
     [TestMethod]
+    public void Send_WithDelayBefore_CommandSentAfterDelay() {
+      queue.Send("T1", 100, 100);
+      sentCommands.Count.Should().Be(0, "because no commands should have been sent yet");
+      timer.TimerElapsed();
+      sentCommands[0].Should().Be("T1");
+      timer.TimerElapsed();
+      sentCommands.Count.Should().Be(1);
+    }
+
+    [TestMethod]
     public void SendLowPriority_QueueIsEmpty_SendsImmediately() {
       queue.SendLowPriority("Test1", "TX");
       queue.SendLowPriority("Test2", "TX");

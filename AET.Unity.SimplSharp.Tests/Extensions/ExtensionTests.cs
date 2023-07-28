@@ -143,6 +143,28 @@ namespace AET.Unity.SimplSharp.Tests {
       s.FormatAsList().Should().Be("this, that, or the other");
     }
     #endregion
+
+    [DataTestMethod]
+    [DataRow(0,0)]
+    [DataRow(1,655)]
+    [DataRow(50,32767)]
+    [DataRow(99,64879)]
+    [DataRow(100,65535)]
+    public void ConvertHundredBaseTo16Bit_ConvertsCorrectly(int value, int expected) {
+      ushort v = (ushort)value;
+      v.ConvertHundredBaseTo16Bit().Should().Be((ushort)expected);
+    }
+
+    [DataTestMethod]
+    [DataRow(0, 0)]
+    [DataRow(655, 1)]
+    [DataRow(32767, 50)]
+    [DataRow(64879, 99)]
+    [DataRow(65535, 100)]
+    public void Convert16BitToHundredBase_ConvertsCorrectly(int value, int expected) {
+      ushort v = (ushort)value;
+      v.Convert16BitToHundredBase().Should().Be((ushort)expected);
+    }
   }
 
 }

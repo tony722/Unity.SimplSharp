@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Crestron.SimplSharp.Net.Http;
-using ContentSource = Crestron.SimplSharp.Net.Http.ContentSource;
-using RequestType = Crestron.SimplSharp.Net.Http.RequestType;
+using Crestron.SimplSharp.Net.Https;
 
 namespace AET.Unity.SimplSharp.HttpUtility {
-  public sealed class HttpClientPool : IDisposable {
+  public sealed class HttpsClientPool : IDisposable {
 
-    private readonly ObjectPool<Lazy<Crestron.SimplSharp.Net.Http.HttpClient>> httpClientPool;
+    private readonly ObjectPool<Lazy<Crestron.SimplSharp.Net.Https.HttpsClient>> httpClientPool;
 
-    public HttpClientPool() : this(10) { }
+    public HttpsClientPool() : this(10) { }
 
-    public HttpClientPool(int poolSize) {
-      httpClientPool = new ObjectPool<Lazy<Crestron.SimplSharp.Net.Http.HttpClient>>(poolSize, poolSize,
-            () => new Lazy<Crestron.SimplSharp.Net.Http.HttpClient>(() => new Crestron.SimplSharp.Net.Http.HttpClient {
+    public HttpsClientPool(int poolSize, bool enableCertificateVerification) {
+      httpClientPool = new ObjectPool<Lazy<Crestron.SimplSharp.Net.Https.HttpsClient>>(poolSize, poolSize,
+            () => new Lazy<Crestron.SimplSharp.Net.Https.HttpsClient>(() => new Crestron.SimplSharp.Net.Https.HttpsClient {
               TimeoutEnabled = true,
               Timeout = 5,
-              KeepAlive = false
+              KeepAlive = false,
+              PeerVerification = enableCertificateVerification,
+              HostVerification = enableCertificateVerification
             })) { CleanupPoolOnDispose = true };
     }
+
+    public HttpsClientPool(int poolSize) : this(poolSize, true) { }
 
     private HttpResult SendRequest(string url, RequestType requestType, string content, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
       var obj = httpClientPool.GetFromPool();
@@ -29,7 +31,7 @@ namespace AET.Unity.SimplSharp.HttpUtility {
         if (client.ProcessBusy)
           client.Abort();
 
-        var httpRequest = new HttpClientRequest {
+        var httpRequest = new HttpsClientRequest {
           RequestType = requestType,
           Encoding = Encoding.UTF8,
           KeepAlive = false,
@@ -42,12 +44,12 @@ namespace AET.Unity.SimplSharp.HttpUtility {
 
         if (additionalHeaders != null) {
           foreach (var item in additionalHeaders)
-            httpRequest.Header.AddHeader(new HttpHeader(item.Key, item.Value));
+            httpRequest.Header.AddHeader(new HttpsHeader(item.Key, item.Value));
         }
 
         httpRequest.Url.Parse(url);
 
-        var httpResponse = client.Dispatch(httpRequest);
+        HttpsClientResponse httpResponse = client.Dispatch(httpRequest);
         return new HttpResult(httpResponse.Code, httpResponse.ResponseUrl, httpResponse.ContentString);
       } catch (Exception ex) {
         throw ex;

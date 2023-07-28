@@ -83,10 +83,12 @@
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="FileIO\TestFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
+    <Compile Include="HttpClient\CrestronHttpsClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
     <Compile Include="HttpClient\TestHttpClient.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />
     <Compile Include="HttpUtility\HttpResult.cs" />
+    <Compile Include="HttpUtility\HttpsClientPool.cs" />
     <Compile Include="Http\CrestronHttpReader.cs" />
     <Compile Include="Http\IHttpReader.cs" />
     <Compile Include="Http\TestHttpReader.cs" />
