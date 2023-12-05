@@ -49,8 +49,6 @@ namespace AET.Unity.SimplSharp.HttpUtility {
 
         var httpResponse = client.Dispatch(httpRequest);
         return new HttpResult(httpResponse.Code, httpResponse.ResponseUrl, httpResponse.ContentString);
-      } catch (Exception ex) {
-        throw ex;
       } finally {
         httpClientPool.AddToPool(obj);
       }      
