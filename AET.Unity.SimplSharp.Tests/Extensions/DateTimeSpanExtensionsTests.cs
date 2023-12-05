@@ -224,5 +224,17 @@ namespace AET.Unity.SimplSharp.Tests.Extensions {
       newTime.ShouldBeEquivalentTo(TimeSpan.Parse("15:30:00"));
     }
 
+    [TestMethod]
+    public void UnixUtcToDateTime_ConvertsCorrectly() {
+      var unixTime = 1684535526979;
+      unixTime.UnixUtcToDateTime().Should().Be(new DateTime(2023, 05, 19, 22, 32, 06, 979));
+    }
+
+    [TestMethod]
+    public void DateTimeUtcToUnix_ConvertsCorrectly() {
+      var time = new DateTime(2023, 05, 19, 22, 32, 06, 979, DateTimeKind.Utc);
+      time.UtcDateTimeToUnix().Should().Be(1684535526979);
+    }
+
   }
 }

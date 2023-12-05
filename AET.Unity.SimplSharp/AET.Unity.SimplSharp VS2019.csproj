@@ -69,6 +69,8 @@
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentSortedList.cs" />
+    <Compile Include="ConsoleMessage\TestConsoleMessageHandler.cs" />
+    <Compile Include="CsvFileParser.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="DateTimeAdjuster.cs" />
     <Compile Include="DateTimeProvider\CrestronDateTimeProvider.cs" />
@@ -94,6 +96,9 @@
     <Compile Include="Http\TestHttpReader.cs" />
     <Compile Include="IIndexers.cs" />
     <Compile Include="Lazy.cs" />
+    <Compile Include="ConsoleMessage\ConsoleMessage.cs" />
+    <Compile Include="ConsoleMessage\CrestronConsoleMessageHandler.cs" />
+    <Compile Include="ConsoleMessage\IConsoleMessageHandler.cs" />
     <Compile Include="Microsoft\System.Collections\IStructuralComparable.cs" />
     <Compile Include="Microsoft\System.Collections\IStructuralEquatable.cs" />
     <Compile Include="Microsoft\System.Numerics.Hashing\HashHelpers.cs" />

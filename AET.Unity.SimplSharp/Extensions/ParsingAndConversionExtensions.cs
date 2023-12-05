@@ -58,6 +58,8 @@ namespace AET.Unity.SimplSharp {
       }
     }
 
+    public static bool SafeParseBool(this ushort value) { return value > 0; }
+
     public static bool SafeParseBool(this string value) {
       if (value.IsNullOrWhiteSpace()) return false;
       var trimmedValue = value.Trim();

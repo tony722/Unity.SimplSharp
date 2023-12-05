@@ -6,9 +6,9 @@ namespace AET.Unity.SimplSharp {
     private string line;
     private List<string> list;
     private int pos, lastChar;
-    string cell;
+    private string cell;
 
-    public IList<String> ParseLine(string lineToParse) {
+    public IList<string> ParseLine(string lineToParse) {
       list = new List<string>();
       line = lineToParse;
       cell = string.Empty;
@@ -34,7 +34,7 @@ namespace AET.Unity.SimplSharp {
     }
 
     private void ParseQuoteDelimited() {
-      pos = pos + 2;
+      pos += 2;
       while (pos < lastChar && !(line[pos] == '\"' && line[pos + 1] == ',')) {
         if (line[pos] == '\"' && line[pos + 1] == '\"') pos += 1;
         cell += line[pos];

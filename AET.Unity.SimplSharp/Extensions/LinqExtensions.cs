@@ -8,7 +8,7 @@ namespace AET.Unity.SimplSharp {
     public static IEnumerable<T> Insert<T>(
         this IEnumerable<T> values, T value) {
       yield return value;
-      foreach (T item in values) {
+      foreach (var item in values) {
         yield return item;
       }
     }
@@ -29,6 +29,30 @@ namespace AET.Unity.SimplSharp {
 
     public static IEnumerable<V> GetValues<K, V>(this AnyKeyDictionary<K, V> dict, IEnumerable<K> keys) {
       return keys.Select((x) => dict[x]);
+    }
+
+    /// <summary>
+    /// ToDictionary method that allows duplicate keys (uses last item if duplicates exist)
+    /// </summary>
+    public static Dictionary<TKey, TElement> SafeToDictionary<TSource, TKey, TElement>(
+      this IEnumerable<TSource> source, 
+      Func<TSource, TKey> keySelector, 
+      Func<TSource, TElement> elementSelector, 
+      IEqualityComparer<TKey> comparer)
+    {
+      var dictionary = new Dictionary<TKey, TElement>(comparer);
+
+      if (source == null)
+      {
+        return dictionary;
+      }
+
+      foreach (var element in source)
+      {
+        dictionary[keySelector(element)] = elementSelector(element);
+      }
+
+      return dictionary; 
     }
   }
 }

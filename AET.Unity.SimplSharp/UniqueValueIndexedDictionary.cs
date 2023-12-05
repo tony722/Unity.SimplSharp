@@ -19,9 +19,11 @@ namespace AET.Unity.SimplSharp {
     }
 
     public override TValue Remove(TKey key) {
-      var value = base.Remove(key);
-      uniqueValues.Remove(value);
-      return value;
+      lock (mutex) {
+        var value = base.Remove(key);
+        uniqueValues.Remove(value);
+        return value;
+      }
     }
 
     public virtual void RemoveValue(TValue value) {

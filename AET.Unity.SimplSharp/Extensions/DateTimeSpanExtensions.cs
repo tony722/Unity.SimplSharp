@@ -101,5 +101,14 @@ namespace AET.Unity.SimplSharp {
     public static TimeSpan SetAm(this TimeSpan timeSpan, bool isAm) {
       return timeSpan.SetHour12(timeSpan.Hours12(), !isAm);
     }
+
+    public static DateTime UnixUtcToDateTime(this long unixUtc) {
+      return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(unixUtc);
+    }
+
+    public static long UtcDateTimeToUnix(this DateTime dateTime) {
+      return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+    }
+
   }
 }

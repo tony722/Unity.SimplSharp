@@ -1,18 +1,15 @@
 namespace AET.Unity.SimplSharp.HttpUtility {
   public class HttpResult {
-    private readonly int _status;
-    public int Status { get { return _status; } }
+    public int Status { get; private set; }
 
-    private readonly string _responseUrl;
-    public string ResponseUrl { get { return _responseUrl; } }
+    public string ResponseUrl { get; private set; }
 
-    private readonly string _content;
-    public string Content { get { return _content; } }
+    public string Content { get; private set; }
 
     public HttpResult(int status, string responseUrl, string content) {
-      _status = status;
-      _responseUrl = responseUrl;
-      _content = content;
+      Status = status;
+      ResponseUrl = responseUrl;
+      Content = content;
     }
   }
 }

@@ -1,10 +1,16 @@
 ﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <Major>1</Major>
+    <Minor>0</Minor>
+    <Build>10</Build>
+    <Revision>257</Revision>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}</ProjectGuid>
+    <ProjectGuid>{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AET.Unity.SimplSharp</RootNamespace>
@@ -68,6 +74,11 @@
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="Concurrent\ConcurrentSortedList.cs" />
+    <Compile Include="ConsoleMessage\ConsoleMessage.cs" />
+    <Compile Include="ConsoleMessage\CrestronConsoleMessageHandler.cs" />
+    <Compile Include="ConsoleMessage\IConsoleMessageHandler.cs" />
+    <Compile Include="ConsoleMessage\TestConsoleMessageHandler.cs" />
+    <Compile Include="CsvFileParser.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="DateTimeAdjuster.cs" />
     <Compile Include="DateTimeProvider\CrestronDateTimeProvider.cs" />
@@ -86,6 +97,7 @@
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpsClient.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
+    <Compile Include="HttpClient\CrestronHttpsTcpClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
     <Compile Include="HttpUtility\HttpsClientPool.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />

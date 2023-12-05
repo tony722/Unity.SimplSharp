@@ -46,20 +46,14 @@ namespace AET.Unity.SimplSharp.HttpUtility {
           foreach (var item in additionalHeaders)
             httpRequest.Header.AddHeader(new HttpsHeader(item.Key, item.Value));
         }
-
-        httpRequest.Url.Parse(url);
-
-        HttpsClientResponse httpResponse = client.Dispatch(httpRequest);
+        httpRequest.Url.Parse(url);        
+        var httpResponse = client.Dispatch(httpRequest);
         return new HttpResult(httpResponse.Code, httpResponse.ResponseUrl, httpResponse.ContentString);
-      } catch (Exception ex) {
-        throw ex;
       } finally {
         httpClientPool.AddToPool(obj);
-      }      
+      }
     }
-
-
-
+    
     public HttpResult Get(string url) {
       return Get(url, null);
     }
