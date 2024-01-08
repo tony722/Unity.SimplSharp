@@ -77,7 +77,6 @@
     <Compile Include="AssemblyInit.cs" />
     <Compile Include="TxQueueTests.cs" />
     <Compile Include="CsvParserTests.cs" />
-    <Compile Include="HttpClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

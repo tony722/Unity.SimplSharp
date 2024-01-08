@@ -97,7 +97,6 @@
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpsClient.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
-    <Compile Include="HttpClient\CrestronHttpsTcpClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
     <Compile Include="HttpUtility\HttpsClientPool.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />

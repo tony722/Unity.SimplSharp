@@ -50,6 +50,10 @@ namespace AET.Unity.SimplSharp {
       }
     }
 
+    public void Remove(TKey id) {
+      dict.Remove(id);
+    }
+
     public int Count {
       get { return dict.Keys.Count; }
     }
@@ -79,6 +83,6 @@ namespace AET.Unity.SimplSharp {
 
       public TKey Key { get; set; }
       public TValue Value { get; set; }
-    } 
+    }
   }
 }
