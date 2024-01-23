@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AET.Unity.SimplSharp {
   public static class LinqExtensions {
@@ -27,7 +26,7 @@ namespace AET.Unity.SimplSharp {
       return keys.Select((x) => dict[x]);
     }
 
-    public static IEnumerable<V> GetValues<K, V>(this AnyKeyDictionary<K, V> dict, IEnumerable<K> keys) {
+    public static IEnumerable<V> GetValues<K, V>(this AnyKeyDictionary<K, V> dict, IEnumerable<K> keys) where V : new() {
       return keys.Select((x) => dict[x]);
     }
 

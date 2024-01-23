@@ -4,15 +4,15 @@ namespace AET.Unity.SimplSharp {
   public class TestMutex : IMutex {
     private readonly object mutex = new object();
 
-    public void Enter() {
+    public override void Enter() {
       Monitor.Enter(mutex);
     }
 
-    public bool TryEnter() {
+    public override bool TryEnter() {
       return Monitor.TryEnter(mutex);
     }
 
-    public void Exit() {
+    public override void Exit() {
       Monitor.Exit(mutex);
     }
   }

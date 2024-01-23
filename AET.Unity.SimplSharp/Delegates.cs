@@ -4,6 +4,8 @@ namespace AET.Unity.SimplSharp {
   public delegate void TriggerDelegate();
 
   public delegate void TriggerArrayDelegate(ushort index);
+  
+  public delegate void SetBoolOutputDelegate(bool value);
 
   public delegate void SetUshortOutputArrayDelegate(ushort index, ushort value);
 
@@ -36,4 +38,6 @@ namespace AET.Unity.SimplSharp {
   public delegate ushort GetUshortInputArrayDelegate(ushort index);
 
   public delegate ushort GetUshortOutputArrayDelegate(ushort index);
+
+
 }

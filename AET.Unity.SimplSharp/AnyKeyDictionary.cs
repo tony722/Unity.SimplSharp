@@ -6,14 +6,16 @@ using AET.Unity.SimplSharp.Concurrent;
 namespace AET.Unity.SimplSharp {
   /// <summary>
   /// A dictionary that does not throw KeyNotFoundExceptions or ArgumentExceptions (Item with the same key has already been added).
-  /// Instead if you try to retrieve an item that has no key, it logs an error message and returns default(t)
+  /// Instead if you try to retrieve an item that has no key, it logs an error message and returns new(t)
   /// </summary>
   /// <typeparam name="TKey"></typeparam>
   /// <typeparam name="TValue"></typeparam>
   public class AnyKeyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> {
     private readonly ConcurrentDictionary<TKey, TValue> dict = new ConcurrentDictionary<TKey, TValue>();
 
-    public AnyKeyDictionary() { }
+    public AnyKeyDictionary() {
+      ValueFactory = () => default(TValue);
+    }
 
     public event EventHandler<SetValueEventArgs> OnSetValue;
     
@@ -27,25 +29,19 @@ namespace AET.Unity.SimplSharp {
       dict.Clear();
     }
 
-    public TValue this[TKey key] {
+    public Func<TValue> ValueFactory { private get; set; }
+
+    public virtual TValue this[TKey key] {
       get {
         TValue value;
-        if (dict.TryGetValue(key, out value)) {
-          return value;
-        }
-        else {
-          ErrorMessage.Notice("Tried to request key {0} that does not exist: returned default.", key);
-          return default(TValue);
-        }
+        if (dict.TryGetValue(key, out value)) return value;
+        ErrorMessage.Notice("Tried to request key {0} that does not exist: returned new {1}.", key, typeof(TValue).Name);
+        value = ValueFactory();
+        dict.Add(key, value);
+        return value;
       }
       set {
-        if (dict.ContainsKey(key)) {
-          dict[key] = value;
-        }
-        else {
-          dict.Add(key, value);
-        }
-
+        dict[key] = value;
         if (OnSetValue != null) OnSetValue(this, new SetValueEventArgs(key, value));
       }
     }

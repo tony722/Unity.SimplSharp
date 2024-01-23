@@ -4,15 +4,15 @@ namespace AET.Unity.SimplSharp {
   public class CrestronMutex : IMutex {
     private readonly object mutex = new object();
 
-    public void Enter() {
+    public override void Enter() {
       CMonitor.Enter(mutex);
     }
 
-    public bool TryEnter() {
+    public override bool TryEnter() {
       return CMonitor.TryEnter(mutex);
     }
 
-    public void Exit() {
+    public override void Exit() {
       try {
         CMonitor.Exit(mutex);
       }

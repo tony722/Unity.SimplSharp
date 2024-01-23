@@ -5,8 +5,15 @@ using System.Linq;
 
 namespace AET.Unity.SimplSharp.Concurrent {
   public class ConcurrentDictionary<TKey, TValue> : IDictionary<TKey, TValue> {
-    private readonly Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
+    private readonly Dictionary<TKey, TValue> dictionary;
     private IMutex mutex;
+
+    public ConcurrentDictionary() {
+      dictionary = new Dictionary<TKey, TValue>();
+    }
+    public ConcurrentDictionary(IEqualityComparer<TKey> comparer) {
+      dictionary =  new Dictionary<TKey, TValue>(comparer);
+    }
 
 
     public IMutex Mutex {
@@ -90,7 +97,9 @@ namespace AET.Unity.SimplSharp.Concurrent {
       get { return dictionary.Keys; }
     }
     public ICollection<TValue> Values {
-      get { return dictionary.Values; }
+      get {
+        return dictionary.Values; 
+      }
     }
   }
 }

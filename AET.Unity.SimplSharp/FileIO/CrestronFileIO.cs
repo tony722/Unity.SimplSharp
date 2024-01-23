@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Crestron.SimplSharp.CrestronIO;
 
 namespace AET.Unity.SimplSharp.FileIO {

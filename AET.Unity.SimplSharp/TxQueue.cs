@@ -10,22 +10,24 @@ namespace AET.Unity.SimplSharp {
     private ITimer timer;
     private readonly Dictionary<string, QueueItem> lowPriorityQueue = new Dictionary<string, QueueItem>();
     private readonly AnyKeyDictionary<string, bool> lowPriorityQueueDisabled = new AnyKeyDictionary<string, bool>();
+    private IMutex mutex;
+
     public TxQueue(Action<T> txAction, int spaceBetweenCommandsMs) {
       this.txAction = txAction;
       SpaceBetweenCommandsMs = spaceBetweenCommandsMs;
-      Timer = new CrestronTimer();
-      Mutex = new CrestronMutex();
     }
 
     #region For Mocking
 
-    public IMutex Mutex { get; set; }
-    public IMutex ActionMutex { get; set; }
+    public IMutex Mutex {
+      get { return mutex ?? (mutex = new CrestronMutex()); } 
+      set { mutex = value; }
+    }
 
     public ITimer Timer {
-      get { return timer; }
-      set {
-        timer = value;
+      get { return timer ?? (Timer = new CrestronTimer()); }
+      set { 
+        timer = value; 
         timer.TimerCallback = TimerCallback;
       }
     }

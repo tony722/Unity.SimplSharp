@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AET.Unity.SimplSharp.Concurrent;
 
 namespace AET.Unity.SimplSharp {
   public class IndexedDictionary<TKey, TValue> : IEnumerable<TValue> {
     private readonly List<TValue> list = new List<TValue>();
-    private readonly Dictionary<TKey, TValue> dict;
+    private readonly ConcurrentDictionary<TKey, TValue> dict;
 
     private readonly object mutex = new object();
-    public IndexedDictionary() { 
-      dict = new Dictionary<TKey, TValue>();
+    public IndexedDictionary() {
+      if (typeof(TKey) == typeof(int)) throw new ArgumentException("Key cannot be type of int");
+      dict = new ConcurrentDictionary<TKey, TValue>();
     }
     public IndexedDictionary(IEqualityComparer<TKey> comparer) {
-      dict = new Dictionary<TKey, TValue>(comparer);
+      dict = new ConcurrentDictionary<TKey, TValue>(comparer);
     }
     public TValue this[int index] {
       get { return list[index]; }
@@ -22,7 +24,7 @@ namespace AET.Unity.SimplSharp {
       get { return dict[key]; }
     }
 
-    public Dictionary<TKey, TValue>.KeyCollection Keys {
+    public ICollection<TKey> Keys {
       get { return dict.Keys; }
     }
 

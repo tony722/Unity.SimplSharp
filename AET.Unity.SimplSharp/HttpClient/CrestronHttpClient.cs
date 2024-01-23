@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AET.Unity.SimplSharp.HttpUtility;
 using Crestron.SimplSharp;
 

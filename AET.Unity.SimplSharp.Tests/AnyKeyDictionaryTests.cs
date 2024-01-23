@@ -1,4 +1,6 @@
-﻿using AET.Unity.SimplSharp;
+﻿using System.Collections.Generic;
+using System.Text;
+using AET.Unity.SimplSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,5 +26,13 @@ namespace AET.Unity.SimplSharp.Tests {
       var d = new AnyKeyDictionary<string, string>();
       d["Nothing Here"].Should().BeNull();
     }
+    [TestMethod]
+    public void StringDictionary_RequestValueForNonExistentKey_ValueFactoryIsDefined_ReturnsNewItem() {
+      var d = new AnyKeyDictionary<string, StringBuilder> {
+        ValueFactory = () => new StringBuilder()
+      };
+      d["Nothing Here"].ShouldBeEquivalentTo(new StringBuilder());
+    }
+
   }
 }

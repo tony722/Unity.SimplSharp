@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Crestron.SimplSharp.Net.Http;
-using Crestron.SimplSharp.Net.Https;
+﻿using Crestron.SimplSharp.Net.Https;
 
 namespace AET.Unity.SimplSharp.Http {
   public class CrestronHttpReader: IHttpReader {

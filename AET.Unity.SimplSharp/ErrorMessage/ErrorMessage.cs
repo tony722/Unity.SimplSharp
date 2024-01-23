@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Sockets;
 
 namespace AET.Unity.SimplSharp {
   public enum ErrorMessageType {

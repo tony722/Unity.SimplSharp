@@ -68,7 +68,9 @@
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
+    <Compile Include="Concurrent\ConcurrentQueue.cs" />
     <Compile Include="Concurrent\ConcurrentSortedList.cs" />
+    <Compile Include="ConsoleMessage\OutputConsoleMessageHandler.cs" />
     <Compile Include="ConsoleMessage\TestConsoleMessageHandler.cs" />
     <Compile Include="CsvFileParser.cs" />
     <Compile Include="CsvParser.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Plugins\IPluginsLoader.cs" />
     <Compile Include="Plugins\IPluginTester.cs" />
     <Compile Include="Plugins\TestPluginsLoader.cs" />
+    <Compile Include="PressHold.cs" />
     <Compile Include="PressHoldRepeater.cs" />
     <Compile Include="TimeAdjuster.cs" />
     <Compile Include="TxQueue.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Timer\CrestronTimer.cs" />
     <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Timer\TestTimer.cs" />
+    <Compile Include="TxRxQueue.cs" />
     <Compile Include="UniqueValueNamedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniqueValueIndexedDictionary.cs" />
