@@ -52,10 +52,12 @@ namespace AET.Unity.SimplSharp.Timer {
 
     public override void Stop() {
       timer.Dispose();
+      IsRunning = false;
     }
 
     public override void Dispose() {
       timer.Dispose();
+      IsRunning = false;
     }
 
     private void CTimerCallback(object o) {

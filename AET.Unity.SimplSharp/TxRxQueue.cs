@@ -84,7 +84,9 @@ namespace AET.Unity.SimplSharp {
     }
 
     private void TimerCallback(object o) {
-      mutex.ThreadsafeExecute(() => { if (queue.Peek().Sent) queue.Dequeue(); });
+      mutex.ThreadsafeExecute(() => {
+        if (queue.Count != 0 && queue.Peek().Sent) queue.Dequeue();
+      });
       TriggerSend();
     }
 

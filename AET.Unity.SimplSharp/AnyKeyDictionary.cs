@@ -36,7 +36,7 @@ namespace AET.Unity.SimplSharp {
         TValue value;
         if (dict.TryGetValue(key, out value)) return value;
         ErrorMessage.Notice("Tried to request key {0} that does not exist: returned new {1}.", key, typeof(TValue).Name);
-        value = ValueFactory();
+        value = ValueFactory != null ? ValueFactory() : default(TValue);
         dict.Add(key, value);
         return value;
       }
