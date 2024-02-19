@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AET.Unity.SimplSharp {
   public static class Extensions {
@@ -13,8 +14,12 @@ namespace AET.Unity.SimplSharp {
         if (!char.IsWhiteSpace(c))
           return false;
       }
-
       return true;
+    }
+
+    public static string StripWhiteSpace(this string value) {
+      if (value == null) return null;
+      return Regex.Replace(value, "\\s+", "");
     }
 
     public static IList<string> ParseCsv(this string value) {

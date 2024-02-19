@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,6 +30,24 @@ namespace AET.Unity.SimplSharp.Tests {
     public void IsNullOrWhiteSpace_Text_ReturnsFalse() {
       string t = "hello world";
       t.IsNullOrWhiteSpace().Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void StripWhiteSpace_Null_ReturnsNull() {
+      string t = null;
+      t.StripWhiteSpace().Should().BeNull();
+    }
+
+    [TestMethod]
+    public void StripWhiteSpace_EmptyString_ReturnsEmptyString() {
+      string t = String.Empty;
+      t.StripWhiteSpace().Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void StripWhiteSpace_StringHasWhiteSpace_ReturnsStringWithoutWhitespace() {
+      string t = "h\te l lo";
+      t.StripWhiteSpace().Should().Be("hello");
     }
 
     private enum TestEnum { V1, V2 }
