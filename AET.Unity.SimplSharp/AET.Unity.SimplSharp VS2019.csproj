@@ -97,6 +97,9 @@
     <Compile Include="Http\IHttpReader.cs" />
     <Compile Include="Http\TestHttpReader.cs" />
     <Compile Include="IIndexers.cs" />
+    <Compile Include="IndexedProperty\IndexedProperty.cs" />
+    <Compile Include="IndexedProperty\ReadOnlyIndexedProperty.cs" />
+    <Compile Include="IndexedProperty\WriteOnlyIndexedProperty.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="ConsoleMessage\ConsoleMessage.cs" />
     <Compile Include="ConsoleMessage\CrestronConsoleMessageHandler.cs" />
