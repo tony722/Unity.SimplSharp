@@ -184,6 +184,12 @@ namespace AET.Unity.SimplSharp.Tests {
       ushort v = (ushort)value;
       v.Convert16BitToHundredBase().Should().Be((ushort)expected);
     }
+
+    [TestMethod]
+    public void ToSafeFileName_SanitizesCorretly() {
+      var fileName = "Test/File\\A:M*A?R\"Z<Q>M|1.txt";
+      fileName.ToSafeFileName().Should().Be("Test-File-A-M-A-R-Z-Q-M-1.txt");
+    }
   }
 
 }

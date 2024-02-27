@@ -85,9 +85,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AET.Unity.SimplSharp\AET.Unity.SimplSharp VS2019.csproj">
-      <Project>{90bd5c23-a2ca-4b45-b300-df21f41f2c11}</Project>
-      <Name>Unity.SimplSharp VS2019</Name>
+    <ProjectReference Include="..\AET.Unity.SimplSharp\AET.Unity.SimplSharp.2022.csproj">
+      <Project>{9727a743-5f36-49e7-a85f-dbd55379abf9}</Project>
+      <Name>AET.Unity.SimplSharp.2022</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
