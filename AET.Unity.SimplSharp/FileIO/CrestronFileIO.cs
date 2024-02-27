@@ -6,10 +6,11 @@ using Crestron.SimplSharp.CrestronIO;
 namespace AET.Unity.SimplSharp.FileIO {
   public class CrestronFileIO : IFileIO {
     public string ReadAllText(string fileName) {
-      var file = File.OpenText(fileName);
-      var contents = file.ReadToEnd();
-      file.Close();
-      return contents;
+      using (var file = File.OpenText(fileName)) {
+        var contents = file.ReadToEnd();
+        file.Close();
+        return contents;
+      }
     }
 
     public bool Exists(string fileName) {
@@ -19,10 +20,8 @@ namespace AET.Unity.SimplSharp.FileIO {
 
     public void WriteText(string fileName, string data) {
       try {
-        var file = File.CreateText(fileName);
-        WriteFile(fileName, data, file);
-      }
-      catch (Exception ex) {
+        using (var file = File.CreateText(fileName)) WriteFile(fileName, data, file);
+      } catch (Exception ex) {
         ErrorMessage.Error("WriteText({0}) Error Creating File: \r\n{1}", fileName, ex.Message);
       }
     }
@@ -30,11 +29,9 @@ namespace AET.Unity.SimplSharp.FileIO {
     private static void WriteFile(string fileName, string data, StreamWriter file) {
       try {
         file.Write(data);
-      }
-      catch (Exception ex) {
+      } catch (Exception ex) {
         ErrorMessage.Error("WriteText({0}) Error Writing:\r\n{1}", fileName, ex.Message);
-      }
-      finally {
+      } finally {
         file.Close();
       }
     }
@@ -44,8 +41,7 @@ namespace AET.Unity.SimplSharp.FileIO {
       if (useVersioning) {
         VersionExistingFile(fileName);
         PurgeOldVersions(fileName);
-      }
-      else {
+      } else {
         DeleteExistingFile(fileName);
       }
       WriteText(fileName, data);
@@ -54,8 +50,7 @@ namespace AET.Unity.SimplSharp.FileIO {
     private void DeleteExistingFile(string fileName) {
       try {
         if (File.Exists(fileName)) File.Delete(fileName);
-      }
-      catch (Exception ex) {
+      } catch (Exception ex) {
         ErrorMessage.Error("Error deleting file '{0}': \r\n {1}", fileName, ex.Message);
       }
     }
@@ -67,8 +62,7 @@ namespace AET.Unity.SimplSharp.FileIO {
         var fileInfo = new FileInfo(fileName);
         var newFileName = string.Format("{0}\\{1:yyyy-MM-dd_HH.mm.ss}_{2}", BackupDirectoryPath(fileName), DateTime.Now, fileInfo.Name);
         File.Move(fileName, newFileName);
-      }
-      catch (Exception ex) {
+      } catch (Exception ex) {
         ErrorMessage.Error("Error VersionExistingFile({0}):\r\n{1}", fileName, ex.Message);
       }
     }
@@ -80,8 +74,7 @@ namespace AET.Unity.SimplSharp.FileIO {
         try {
           File.Delete(file); //Keep most recent file
           ErrorMessage.Notice("PurgeOldVersions() deleted '{0}'.", file);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
           ErrorMessage.Error("PurgeOldVersions({0} Error:\r\n{1}", file, ex.Message);
         }
       }
@@ -95,8 +88,7 @@ namespace AET.Unity.SimplSharp.FileIO {
           var fileDate = File.GetCreationTime(file);
           var fileAge = DateTime.Now - fileDate;
           if (fileAge.Days > daysOld) filesToDelete.Add(fileDate, file);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
           ErrorMessage.Error("Error PurgeOldVersions({0}):\r\n{1}", file, ex.Message);
         }
       }
@@ -108,10 +100,9 @@ namespace AET.Unity.SimplSharp.FileIO {
         var folder = BackupDirectoryPath(fileName);
         var files = Directory.GetFiles(folder);
         return files;
-      }
-      catch (Exception ex) {
+      } catch (Exception ex) {
         ErrorMessage.Error("Unable to GetBackupFiles({0}):\r\n{1}", fileName, ex.Message);
-        return new string[]{};
+        return new string[] { };
       }
     }
 
