@@ -74,5 +74,9 @@ namespace AET.Unity.SimplSharp {
       int v2 = value;
       return (ushort)v2.Clamp(min, max);
     }
+
+    public static string ToSafeFileName(this string value) {
+      return Regex.Replace(value,"[\\\\/:*?\"<>|]", "-" );
+    }
   }
 }

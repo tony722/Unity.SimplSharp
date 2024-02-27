@@ -104,6 +104,9 @@
     <Compile Include="Http\CrestronHttpReader.cs" />
     <Compile Include="Http\IHttpReader.cs" />
     <Compile Include="IdCollection.cs" />
+    <Compile Include="IndexedProperty\IndexedProperty.cs" />
+    <Compile Include="IndexedProperty\ReadOnlyIndexedProperty.cs" />
+    <Compile Include="IndexedProperty\WriteOnlyIndexedProperty.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
