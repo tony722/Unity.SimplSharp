@@ -13,30 +13,32 @@ namespace AET.Unity.SimplSharp {
   public class AnyKeyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> {
     private readonly ConcurrentDictionary<TKey, TValue> dict = new ConcurrentDictionary<TKey, TValue>();
 
-    public AnyKeyDictionary() {
-      ValueFactory = () => default(TValue);
+    public AnyKeyDictionary() { }
+
+    public AnyKeyDictionary(Func<TKey, TValue> valueFactory) {
+      ValueFactory = valueFactory;
     }
 
-    public event EventHandler<SetValueEventArgs> OnSetValue;
-    
     public AnyKeyDictionary(IList<TKey> keys, IList<TValue> values) {
       for (var i = 0; i < keys.Count; i++) {
         this[keys[i]] = values[i];
       }
     }
 
+    public event EventHandler<SetValueEventArgs> OnSetValue;
+
     public void Clear() {
       dict.Clear();
     }
 
-    public Func<TValue> ValueFactory { private get; set; }
+    public Func<TKey, TValue> ValueFactory { private get; set; }
     public bool EnableMissingItemNotice { get; set; }
     public virtual TValue this[TKey key] {
       get {
         TValue value;
         if (dict.TryGetValue(key, out value)) return value;
         if(EnableMissingItemNotice) ErrorMessage.Notice("Tried to request key {0} that does not exist: returned new {1}.", key, typeof(TValue).Name);
-        value = ValueFactory != null ? ValueFactory() : default(TValue);
+        value = ValueFactory != null ? ValueFactory(key) : default(TValue);
         dict.Add(key, value);
         return value;
       }
