@@ -76,6 +76,7 @@ namespace AET.Unity.SimplSharp {
     }
 
     public static string ToSafeFileName(this string value) {
+      if (value.IsNullOrWhiteSpace()) return string.Empty;
       return Regex.Replace(value,"[\\\\/:*?\"<>|]", "-" );
     }
   }
