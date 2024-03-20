@@ -73,6 +73,7 @@
     <Compile Include="AnyKeyDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
+    <Compile Include="Concurrent\ConcurrentQueue.cs" />
     <Compile Include="Concurrent\ConcurrentSortedList.cs" />
     <Compile Include="ConsoleMessage\ConsoleMessage.cs" />
     <Compile Include="ConsoleMessage\CrestronConsoleMessageHandler.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="HttpClient\CrestronHttpsClient.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
+    <Compile Include="HttpClient\TestHttpClient.cs" />
     <Compile Include="HttpUtility\HttpsClientPool.cs" />
     <Compile Include="HttpUtility\HttpClientPool.cs" />
     <Compile Include="HttpUtility\HttpResult.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Microsoft\Xml\XmlConverter.cs" />
     <Compile Include="Mutex\CrestronMutex.cs" />
     <Compile Include="Mutex\IMutex.cs" />
+    <Compile Include="Mutex\TestMutex.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="PressHold.cs" />
     <Compile Include="PressHoldRepeater.cs" />

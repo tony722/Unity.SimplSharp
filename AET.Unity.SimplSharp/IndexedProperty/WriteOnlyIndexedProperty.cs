@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace AET.Unity.SimplSharp {
   public class WriteOnlyIndexedProperty<TIndex, TValue> {

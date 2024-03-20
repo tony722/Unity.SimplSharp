@@ -29,7 +29,7 @@ namespace AET.Unity.SimplSharp.Tests {
     [TestMethod]
     public void StringDictionary_RequestValueForNonExistentKey_ValueFactoryIsDefined_ReturnsNewItem() {
       var d = new AnyKeyDictionary<string, StringBuilder> {
-        ValueFactory = () => new StringBuilder()
+        ValueFactory = s => new StringBuilder()
       };
       d["Nothing Here"].ShouldBeEquivalentTo(new StringBuilder());
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AET.Unity.SimplSharp.HttpUtility;
 
 namespace AET.Unity.SimplSharp.HttpClient {

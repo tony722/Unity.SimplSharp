@@ -44,7 +44,7 @@ namespace AET.Unity.SimplSharp.Concurrent {
     }
 
     public bool Contains(KeyValuePair<TKey, TValue> item) {
-      return dictionary.Contains(item);
+      return Mutex.ThreadsafeExecute(() => dictionary.Contains(item));
     }
 
     public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) {
@@ -73,9 +73,7 @@ namespace AET.Unity.SimplSharp.Concurrent {
       return GetEnumerator();
     }
 
-    public bool ContainsKey(TKey key) {
-      return dictionary.ContainsKey(key);
-    }
+    public bool ContainsKey(TKey key) { return Mutex.ThreadsafeExecute(() => dictionary.ContainsKey(key)); }
 
     public bool Remove(TKey key) {
       Mutex.Enter();
@@ -85,7 +83,10 @@ namespace AET.Unity.SimplSharp.Concurrent {
     }
 
     public bool TryGetValue(TKey key, out TValue value) {
-      return dictionary.TryGetValue(key, out value);
+      Mutex.Enter();
+      var r = dictionary.TryGetValue(key, out value);
+      Mutex.Exit();
+      return r;
     }
 
     public virtual TValue this[TKey key] {
