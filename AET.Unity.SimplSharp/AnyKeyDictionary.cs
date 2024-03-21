@@ -25,11 +25,18 @@ namespace AET.Unity.SimplSharp {
       }
     }
 
+    public IMutex Mutex {
+      get { return dict.Mutex; }
+      set { dict.Mutex = value; }
+    }
+
     public event EventHandler<SetValueEventArgs> OnSetValue;
 
     public void Clear() {
       dict.Clear();
     }
+
+    public bool TryGetValue(TKey key, out TValue value) { return dict.TryGetValue(key, out value); }
 
     public Func<TKey, TValue> ValueFactory { private get; set; }
     public bool EnableMissingItemNotice { get; set; }

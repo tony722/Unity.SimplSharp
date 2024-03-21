@@ -86,6 +86,7 @@
     <Compile Include="FileIO\CrestronFileIO.cs" />
     <Compile Include="FileIO\IFileIO.cs" />
     <Compile Include="FileIO\TestFileIO.cs" />
+    <Compile Include="FileIO\TestInMemoryFileIO.cs" />
     <Compile Include="HttpClient\CrestronHttpClient.cs" />
     <Compile Include="HttpClient\CrestronHttpsClient.cs" />
     <Compile Include="HttpClient\IHttpClient.cs" />
