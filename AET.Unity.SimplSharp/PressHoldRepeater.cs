@@ -3,17 +3,25 @@ using AET.Unity.SimplSharp.Timer;
 
 namespace AET.Unity.SimplSharp {
   public class PressHoldRepeater {
-    
-    public PressHoldRepeater() {
-      DelayTimer = new CrestronTimer();
-      DelayTimer.TimerCallback = StartRepeating;
-      RepeatTimer = new CrestronTimer();
-      RepeatTimer.TimerCallback = Repeat;
-    }
+    private ITimer repeatTimer;
+    private ITimer delayTimer;
+
+    public PressHoldRepeater() { }
 
 
-    internal ITimer DelayTimer { get; set; }
-    internal ITimer RepeatTimer { get; set; }
+    internal ITimer DelayTimer { 
+      get { return delayTimer ?? (DelayTimer = new CrestronTimer()); }
+      set {
+        delayTimer = value; 
+        delayTimer.TimerCallback = StartRepeating;
+    } }
+
+    internal ITimer RepeatTimer { 
+      get { return repeatTimer ?? (RepeatTimer = new CrestronTimer()); }
+      set {
+        repeatTimer = value; 
+        repeatTimer.TimerCallback = Repeat;
+    } }
 
     public long DelayTimeMs { get; set; }
     public long RepeatTimeMs { get; set; }

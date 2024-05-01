@@ -31,7 +31,7 @@ namespace AET.Unity.SimplSharp {
 
     public TimeSpan SetTime { get; set; }
 
-    public virtual void HourUpDnPressHold(int amount) {
+    public virtual void HourUpDnPressHold(int amount) { 
       IncrementHour(amount);
       repeatTimer.Start(HourDelayTime, HourRepeatTime, (o) => IncrementHour(amount));
     }
@@ -45,14 +45,7 @@ namespace AET.Unity.SimplSharp {
       repeatTimer.Stop();
     }
 
-    public void IncrementHour(int amount) {
-      var newStartTime = SetTime + TimeSpan.FromHours(amount);
-      SetTime = newStartTime.To24HourTimeSpan();
-    }
-
-    public void IncrementMinute(int amount) {
-      var newTime = SetTime.Add(TimeSpan.FromMinutes(amount));
-      SetTime = newTime.To24HourTimeSpan();
-    }
+    public void IncrementHour(int amount) { SetTime = SetTime.AddHours(amount); }
+    public void IncrementMinute(int amount) { SetTime = SetTime.AddMinutes(amount); }
   }
 }

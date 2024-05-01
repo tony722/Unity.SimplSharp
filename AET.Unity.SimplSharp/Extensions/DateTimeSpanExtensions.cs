@@ -94,7 +94,16 @@ namespace AET.Unity.SimplSharp {
       return timeSpan.SetHour12(timeSpan.Hours12(), isPm);
     }
 
+    public static TimeSpan AddMinutes(this TimeSpan timeSpan, int amount) {
+      var newTime = timeSpan.Add(TimeSpan.FromMinutes(amount));
+      return newTime.To24HourTimeSpan();
+    }
 
+    public static TimeSpan AddHours(this TimeSpan timeSpan, int amount) {
+      var newTime = timeSpan + TimeSpan.FromHours(amount);
+      return newTime.To24HourTimeSpan();
+    }
+    
     public static TimeSpan SetAm(this TimeSpan timeSpan, bool isAm) {
       return timeSpan.SetHour12(timeSpan.Hours12(), !isAm);
     }
