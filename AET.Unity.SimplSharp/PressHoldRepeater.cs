@@ -9,14 +9,20 @@ namespace AET.Unity.SimplSharp {
     public PressHoldRepeater() { }
 
 
-    internal ITimer DelayTimer { 
+    /// <summary>
+    /// Allow injection of ITimer
+    /// </summary>
+    public ITimer DelayTimer { 
       get { return delayTimer ?? (DelayTimer = new CrestronTimer()); }
       set {
         delayTimer = value; 
         delayTimer.TimerCallback = StartRepeating;
     } }
 
-    internal ITimer RepeatTimer { 
+    /// <summary>
+    /// Allow injection of ITimer
+    /// </summary>
+    public ITimer RepeatTimer { 
       get { return repeatTimer ?? (RepeatTimer = new CrestronTimer()); }
       set {
         repeatTimer = value; 
@@ -33,8 +39,7 @@ namespace AET.Unity.SimplSharp {
     }
 
     private void StartRepeating(object o) {
-      Action();
-      RepeatTimer.Start(RepeatTimeMs, RepeatTimeMs, null);
+      RepeatTimer.Start(RepeatTimeMs, RepeatTimeMs, Repeat);
     }
 
     private void Repeat(object o) {

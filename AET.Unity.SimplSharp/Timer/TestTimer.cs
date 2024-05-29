@@ -4,7 +4,10 @@ namespace AET.Unity.SimplSharp.Timer {
   public class TestTimer : ITimer {
     private object callbackObject;
 
-    public override Action<object> TimerCallback { protected get; set; }
+    public override Action<object> TimerCallback {
+      protected get; 
+      set;
+    }
     
     public override bool IsRunning { get; protected set; }
 

@@ -7,7 +7,7 @@ namespace AET.Unity.SimplSharp {
 
     public ITimer Timer {
       get {
-        return delayTimer ?? (delayTimer = new CrestronTimer { TimerCallback = TimerCallback });
+        return delayTimer ?? (Timer = new CrestronTimer());
       }
       set {
         delayTimer = value;

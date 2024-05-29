@@ -2,6 +2,10 @@
 
 namespace AET.Unity.SimplSharp.DateTimeProvider {
   public class TestDateTimeProvider : IDateTimeProvider {
+    static TestDateTimeProvider() {
+      TestDateTime = DateTime.Now; 
+    }
+
     public static DateTime TestDateTime { get; set; }
 
     public DateTime Now {

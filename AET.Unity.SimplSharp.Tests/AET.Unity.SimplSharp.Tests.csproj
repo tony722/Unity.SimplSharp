@@ -80,6 +80,7 @@
     <Compile Include="CsvParserTests.cs" />
     <Compile Include="PressHoldTests.cs" />
     <Compile Include="TxRxQueueTests.cs" />
+    <Compile Include="PressHoldRepeaterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
