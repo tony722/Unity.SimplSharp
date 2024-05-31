@@ -15,6 +15,8 @@ namespace AET.Unity.SimplSharp.Tests {
       repeater.RepeatTimer = repeatTimer;
       repeater.DelayTimer = delayTimer;
       repeater.Action = () => counter++;
+      repeater.RepeatTimeMs = 100;
+
     }
 
     [TestMethod]
@@ -28,6 +30,10 @@ namespace AET.Unity.SimplSharp.Tests {
     public void Press_Hold_IncrementsAsLongAsHeld() {
       repeater.Press();
       delayTimer.TimerElapsed();
+      repeatTimer.TimerElapsed();
+      repeatTimer.TimerElapsed();
+      repeatTimer.TimerElapsed();
+      repeater.Release();
       repeatTimer.TimerElapsed();
       repeatTimer.TimerElapsed();
       repeatTimer.TimerElapsed();

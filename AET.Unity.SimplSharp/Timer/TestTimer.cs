@@ -61,7 +61,8 @@ namespace AET.Unity.SimplSharp.Timer {
     }
 
     public void TimerElapsed() {
-      IsRunning = false;
+      if (!IsRunning) return;
+      if(RepeatMs == 0) IsRunning = false;
       TimerCallback(callbackObject);
     }
   }

@@ -9,8 +9,8 @@ namespace AET.Unity.SimplSharp.Timer {
 
     public override Action<object> TimerCallback { protected get; set; }
     public override bool IsRunning { get; protected set; }
-    public long TimeoutMs { get; set; }
-    public long RepeatMs { get; set; }
+    public long TimeoutMs { get; private set; }
+    public long RepeatMs { get; private set; }
 
 
     public override void Start(long timeoutMs, object callbackObject) {
@@ -61,7 +61,7 @@ namespace AET.Unity.SimplSharp.Timer {
     }
 
     private void CTimerCallback(object o) {
-      IsRunning = false;
+      if(RepeatMs == 0) IsRunning = false;
       TimerCallback(o);
     }
 

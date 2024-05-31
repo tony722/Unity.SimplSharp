@@ -13,6 +13,6 @@ namespace AET.Unity.SimplSharp.FileIO {
     public string ReadAllText(string fileName) { return Files[fileName];  }
     public void WriteText(string fileName, string data) { Files[fileName] = data; }
     public void WriteText(string fileName, string data, bool useVersioning) { Files[fileName] = data; }
-    public bool Exists(string fileName) { return Files.Keys.Contains(fileName); }
+    public bool Exists(string fileName) { return fileName != null || Files.Keys.Contains(fileName); }
   }
 }
