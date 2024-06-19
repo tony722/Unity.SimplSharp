@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AET.Unity.SimplSharp.Concurrent;
 
 namespace AET.Unity.SimplSharp {
   public static class LinqExtensions {
@@ -52,6 +53,10 @@ namespace AET.Unity.SimplSharp {
       }
 
       return dictionary; 
+    }
+
+    public static ConcurrentList<T> ToConcurrentList<T>(this IEnumerable<T> collection) {
+      return new ConcurrentList<T>(collection);
     }
   }
 }

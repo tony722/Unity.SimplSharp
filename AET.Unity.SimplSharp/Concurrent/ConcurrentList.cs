@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AET.Unity.SimplSharp.Concurrent {
   public class ConcurrentList<T> : IList<T> {
-    private readonly List<T> list = new List<T>();
+    private readonly List<T> list;
     private IMutex mutex;
+
+    public ConcurrentList() {
+      list = new List<T>();
+    }
+
+    public ConcurrentList(IEnumerable<T> collection) {
+      list = new List<T>(collection);
+    }
 
     public IMutex Mutex {
       get { return mutex ?? (mutex = new CrestronMutex()); }
