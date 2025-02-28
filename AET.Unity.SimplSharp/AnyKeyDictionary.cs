@@ -1,93 +1,60 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using AET.Unity.SimplSharp.Concurrent;
 
 namespace AET.Unity.SimplSharp {
+
   /// <summary>
-  /// A dictionary that does not throw KeyNotFoundExceptions or ArgumentExceptions (Item with the same key has already been added).
-  /// Instead if you try to retrieve an item that has no key, it logs an error message and returns new(t)
+  /// Functions the same as Dictionary except instead of KeyNotFound it creates the key and default value
   /// </summary>
   /// <typeparam name="TKey"></typeparam>
   /// <typeparam name="TValue"></typeparam>
-  public class AnyKeyDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> {
-    private readonly ConcurrentDictionary<TKey, TValue> dict = new ConcurrentDictionary<TKey, TValue>();
+  public class AnyKeyDictionary<TKey, TValue> : Dictionary<TKey, TValue> {
+    private Func<TKey, TValue> valueFactory = key => default(TValue) ;
 
+    #region Constructors from Dictionary<>
+    /// <summary>
+    /// Initializes a new instance of the MyDictionary class that is empty, has the default initial capacity, and uses the default equality comparer for the key type.
+    /// </summary>
     public AnyKeyDictionary() { }
 
-    public AnyKeyDictionary(Func<TKey, TValue> valueFactory) {
-      ValueFactory = valueFactory;
-    }
+    /// <summary>
+    /// Initializes a new instance of the MyDictionary class that is empty, has the specified initial capacity, and uses the default equality comparer for the key type.
+    /// </summary>
+    /// <param name="capacity">The initial number of elements that the MyDictionary can contain.</param>
+    public AnyKeyDictionary(int capacity) : base(capacity) { }
 
-    public AnyKeyDictionary(IList<TKey> keys, IList<TValue> values) {
-      for (var i = 0; i < keys.Count; i++) {
-        this[keys[i]] = values[i];
-      }
-    }
+    /// <summary>
+    /// Initializes a new instance of the MyDictionary class that is empty, has the default initial capacity, and uses the specified IEqualityComparer<T>.
+    /// </summary>
+    /// <param name="comparer">The IEqualityComparer<T> implementation to use when comparing keys, or null to use the default EqualityComparer<T> for the type of the key.</param>
+    public AnyKeyDictionary(IEqualityComparer<TKey> comparer) : base(comparer) { }
 
-    public IMutex Mutex {
-      get { return dict.Mutex; }
-      set { dict.Mutex = value; }
-    }
+    /// <summary>
+    /// Initializes a new instance of the MyDictionary class that contains elements copied from the specified IDictionary<TKey,TValue> and uses the default equality comparer for the key type.
+    /// </summary>
+    /// <param name="dictionary">The IDictionary<TKey,TValue> whose elements are copied to the new MyDictionary.</param>
+    public AnyKeyDictionary(IDictionary<TKey, TValue> dictionary) : base(dictionary) { }
 
-    public event EventHandler<SetValueEventArgs> OnSetValue;
+    /// <summary>
+    /// Initializes a new instance of the MyDictionary class that contains elements copied from the specified IDictionary<TKey,TValue> and uses the specified IEqualityComparer<T>.
+    /// </summary>
+    /// <param name="dictionary">The IDictionary<TKey,TValue> whose elements are copied to the new MyDictionary.</param>
+    /// <param name="comparer">The IEqualityComparer<T> implementation to use when comparing keys, or null to use the default EqualityComparer<T> for the type of the key.</param>
+    public AnyKeyDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary, comparer) { }
+    #endregion
 
-    public void Clear() {
-      dict.Clear();
-    }
-
-    public bool TryGetValue(TKey key, out TValue value) { return dict.TryGetValue(key, out value); }
-
-    public Func<TKey, TValue> ValueFactory { private get; set; }
-    public bool EnableMissingItemNotice { get; set; }
-    public virtual TValue this[TKey key] {
+    public new TValue this[TKey key] {
       get {
         TValue value;
-        if (dict.TryGetValue(key, out value)) return value;
-        if(EnableMissingItemNotice) ErrorMessage.Notice("Tried to request key {0} that does not exist: returned new {1}.", key, typeof(TValue).Name);
-        value = ValueFactory != null ? ValueFactory(key) : default(TValue);
-        dict.Add(key, value);
-        return value;
+        if(TryGetValue(key, out value)) return value;
+        return base[key] = ValueFactory(key);
       }
-      set {
-        dict[key] = value;
-        if (OnSetValue != null) OnSetValue(this, new SetValueEventArgs(key, value));
-      }
-    }
-    
-    public void Remove(TKey id) {
-      dict.Remove(id);
+      set { base[key] = value; }
     }
 
-    public int Count {
-      get { return dict.Keys.Count; }
-    }
-
-    public ICollection<TValue> Values {
-      get { return dict.Values; }
-    }
-
-    public ICollection<TKey> Keys {
-      get { return dict.Keys; }
-    }
-
-
-    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() {
-      return dict.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator() {
-      return GetEnumerator();
-    }
-
-    public class SetValueEventArgs : EventArgs {
-      public SetValueEventArgs(TKey key, TValue value) {
-        Key = key;
-        Value = value;
-      }
-
-      public TKey Key { get; set; }
-      public TValue Value { get; set; }
+    public Func<TKey, TValue> ValueFactory {
+      get { return valueFactory; }
+      set { valueFactory = value; }
     }
   }
 }

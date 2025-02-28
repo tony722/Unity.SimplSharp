@@ -72,6 +72,14 @@ namespace AET.Unity.SimplSharp {
       if (queue.Count == 0) return;
       if (Timer.IsRunning) return;
       var item = mutex.ThreadsafeExecute(() => queue.Peek());
+      if (item == null) {
+        ErrorMessage.Warn("Unity.SimplSharp.TxRxQueue: queue.Peek item is null.");
+        return;
+      }
+      if (TransmitHandler == null) {
+        ErrorMessage.Warn("Unity.SimplSharp.TxRxQueue: TransmitHandler is null.");
+        return;        
+      }
       item.Sent = true;
       if (item.TimeoutMs > 0) {
         Timer.Start(item.TimeoutMs);

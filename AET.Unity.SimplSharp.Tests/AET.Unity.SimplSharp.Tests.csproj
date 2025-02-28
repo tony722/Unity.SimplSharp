@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Extensions\DateTimeSpanExtensionsTests.cs" />
     <Compile Include="Extensions\SafeParseVersionTests.cs" />
+    <Compile Include="Extensions\GuidExtensionTests.cs" />
     <Compile Include="IndexerPropertyTests.cs" />
     <Compile Include="UniqueValueIndexedDictionaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="PressHoldTests.cs" />
     <Compile Include="TxRxQueueTests.cs" />
     <Compile Include="PressHoldRepeaterTests.cs" />
+    <Compile Include="HttpClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

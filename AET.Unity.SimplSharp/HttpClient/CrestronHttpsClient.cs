@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AET.Unity.SimplSharp.HttpUtility;
 using Crestron.SimplSharp;
 
@@ -14,10 +15,12 @@ namespace AET.Unity.SimplSharp.HttpClient {
 
     public ushort Debug { get; set; }
 
+    public Encoding Encoding { get { return pool.Encoding; } set { pool.Encoding = value; } }
+
     public HttpResult Get(string url) {
       return Get(url, null);
     }
-
+    
     public HttpResult Get(string url, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
       if (Debug == 1) CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.PostAsync({0})\r\nHeaders: {1}", url, PrintDictionary(additionalHeaders));
       try {

@@ -1,5 +1,6 @@
 ﻿using AET.Unity.SimplSharp.HttpUtility;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AET.Unity.SimplSharp.HttpClient {
   public interface IHttpClient {
@@ -13,5 +14,7 @@ namespace AET.Unity.SimplSharp.HttpClient {
     HttpResult Get(string url, IEnumerable<KeyValuePair<string, string>> additionalHeaders);
 
     ushort Debug { get; set; }
+
+    Encoding Encoding { get; set; }
   }
 }

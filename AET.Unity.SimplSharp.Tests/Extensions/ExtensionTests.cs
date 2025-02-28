@@ -16,19 +16,19 @@ namespace AET.Unity.SimplSharp.Tests {
 
     [TestMethod]
     public void IsNullOrWhiteSpace_EmptyString_RetunsTrue() {
-      string t = "";
+      var t = "";
       t.IsNullOrWhiteSpace().Should().BeTrue();
     }
 
     [TestMethod]
     public void IsNullOrWhiteSpace_MultipleSpacesAndTabs_ReturnsTrue() {
-      string t = "\t  \n ";
+      var t = "\t  \n ";
       t.IsNullOrWhiteSpace().Should().BeTrue();
     }
 
     [TestMethod]
     public void IsNullOrWhiteSpace_Text_ReturnsFalse() {
-      string t = "hello world";
+      var t = "hello world";
       t.IsNullOrWhiteSpace().Should().BeFalse();
     }
 
@@ -40,13 +40,13 @@ namespace AET.Unity.SimplSharp.Tests {
 
     [TestMethod]
     public void StripWhiteSpace_EmptyString_ReturnsEmptyString() {
-      string t = String.Empty;
+      var t = string.Empty;
       t.StripWhiteSpace().Should().BeEmpty();
     }
 
     [TestMethod]
     public void StripWhiteSpace_StringHasWhiteSpace_ReturnsStringWithoutWhitespace() {
-      string t = "h\te l lo";
+      var t = "h\te l lo";
       t.StripWhiteSpace().Should().Be("hello");
     }
 
@@ -146,19 +146,19 @@ namespace AET.Unity.SimplSharp.Tests {
 
     [TestMethod]
     public void FormatAsList_SingleElement_ReturnsElement() {
-      string[] s = new [] {""};
+      var s = new [] {""};
       s.FormatAsList().Should().Be("");
     }
 
     [TestMethod]
     public void FormatAsList_TwoElements_ReturnsElementsSeparatedByOr() {
-      string[] s = new[] {"this", "that"};
+      var s = new[] {"this", "that"};
       s.FormatAsList().Should().Be("this or that");
     }
 
     [TestMethod]
     public void FormatAsList_MoreThanTwoElements_ReturnsElementsSeparatedByCommas() {
-      string[] s = new[] { "this", "that", "the other" };
+      var s = new[] { "this", "that", "the other" };
       s.FormatAsList().Should().Be("this, that, or the other");
     }
     #endregion
@@ -170,7 +170,7 @@ namespace AET.Unity.SimplSharp.Tests {
     [DataRow(99,64879)]
     [DataRow(100,65535)]
     public void ConvertHundredBaseTo16Bit_ConvertsCorrectly(int value, int expected) {
-      ushort v = (ushort)value;
+      var v = (ushort)value;
       v.ConvertHundredBaseTo16Bit().Should().Be((ushort)expected);
     }
 
@@ -181,7 +181,7 @@ namespace AET.Unity.SimplSharp.Tests {
     [DataRow(64879, 99)]
     [DataRow(65535, 100)]
     public void Convert16BitToHundredBase_ConvertsCorrectly(int value, int expected) {
-      ushort v = (ushort)value;
+      var v = (ushort)value;
       v.Convert16BitToHundredBase().Should().Be((ushort)expected);
     }
 
@@ -189,6 +189,40 @@ namespace AET.Unity.SimplSharp.Tests {
     public void ToSafeFileName_SanitizesCorretly() {
       var fileName = "Test/File\\A:M*A?R\"Z<Q>M|1.txt";
       fileName.ToSafeFileName().Should().Be("Test-File-A-M-A-R-Z-Q-M-1.txt");
+    }
+
+    #region SplitLines
+
+    [TestMethod]
+    public void SplitLines_NullOrEmptyString_ReturnsNullEnumeration() {
+      string lines = null;
+      lines.SplitLines().Should().BeEmpty();
+
+      lines = string.Empty;
+      lines.SplitLines().Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void SplitLines_SplitWithCrLf_ReturnsCorrectlySplitLines() {
+      var lines = "Hello\r\nThere\r\nWorld".SplitLines(); 
+      lines.Should().BeEquivalentTo("Hello", "There", "World");
+    }
+
+    [TestMethod]
+    public void SplitLines_SplitWithCr_ReturnsCorrectlySplitLines() {
+      var lines = "Hello\rThere\rWorld".SplitLines(); 
+      lines.Should().BeEquivalentTo( "Hello", "There", "World");
+    }
+    [TestMethod]
+    public void SplitLines_SplitWithLf_ReturnsCorrectlySplitLines() {
+      var lines = "Hello\nThere\nWorld\n".SplitLines(); 
+      lines.Should().BeEquivalentTo( "Hello", "There", "World" );
+    }
+    #endregion
+
+    [TestMethod]
+    public void Base64Decode_ValidBase64String_DecodesCorrectly() {
+      "SGVsbG8gV29ybGQuIDEyMzQ1Njc4OTAge31bXQ==".Base64Decode().Should().Be("Hello World. 1234567890 {}[]");
     }
   }
 

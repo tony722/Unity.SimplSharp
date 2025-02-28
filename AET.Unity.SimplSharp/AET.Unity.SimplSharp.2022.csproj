@@ -53,6 +53,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimplSharpCryptographyInterface">
+      <HintPath>C:\ProgramData\Crestron\SDK\SimplSharpCryptographyInterface.dll</HintPath>
+    </Reference>
     <Reference Include="SimplSharpHelperInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\ProgramData\Crestron\SDK\SimplSharpHelperInterface.dll</HintPath>
@@ -65,7 +68,9 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnyIndexList.cs" />
     <Compile Include="AnyKeyDictionary.cs" />
+    <Compile Include="Concurrent\AnyKeyConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentList.cs" />
     <Compile Include="Concurrent\ConcurrentDictionary.cs" />
     <Compile Include="Concurrent\ConcurrentQueue.cs" />
@@ -80,6 +85,7 @@
     <Compile Include="DateTimeProvider\IDateTimeProvider.cs" />
     <Compile Include="DateTimeProvider\TestDateTimeProvider.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Extensions\ParsingAndConversionExtensions.cs" />
     <Compile Include="Extensions\DateTimeSpanExtensions.cs" />
@@ -121,6 +127,9 @@
     <Compile Include="Plugins\TestPluginsLoader.cs" />
     <Compile Include="PressHold.cs" />
     <Compile Include="PressHoldRepeater.cs" />
+    <Compile Include="Delay\CrestronDelay.cs" />
+    <Compile Include="Delay\IDelay.cs" />
+    <Compile Include="Delay\TestDelay.cs" />
     <Compile Include="TimeAdjuster.cs" />
     <Compile Include="TxQueue.cs" />
     <Compile Include="IdCollection.cs" />
@@ -140,6 +149,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniqueValueIndexedDictionary.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

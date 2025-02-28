@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AET.Unity.SimplSharp.HttpUtility;
 using Crestron.SimplSharp;
 
@@ -12,6 +13,12 @@ namespace AET.Unity.SimplSharp.HttpClient {
       pool = new HttpClientPool(poolSize);
     }
 
+    public CrestronHttpClient(int poolSize, int timeout) {
+      pool = new HttpClientPool(poolSize, timeout);
+    }
+
+    public Encoding Encoding { get { return pool.Encoding; } set { pool.Encoding = value; } }
+
     public ushort Debug { get; set; }
 
     public HttpResult Get(string url) {
@@ -19,15 +26,22 @@ namespace AET.Unity.SimplSharp.HttpClient {
     }
 
     public HttpResult Get(string url, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
-      if (Debug == 1) CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.PostAsync({0})\r\nHeaders: {1}", url, PrintDictionary(additionalHeaders));
+      if (Debug == 1) {
+        CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.PostAsync({0})", url);        
+        if(additionalHeaders != null) CrestronConsole.PrintLine("    Headers: {0}", PrintDictionary(additionalHeaders));
+      }
       try {
         var results = pool.Get(url, additionalHeaders);
         if (Debug == 1) CrestronConsole.PrintLine("Results status({0}): {1}", results.Status, results.Content);
         return results;
-      } catch (Exception ex) {
-        ErrorMessage.Error("Unity.CrestronHttpClient.Get({0}) Error: {1}", url, ex.Message);
+      } catch (SocketException ex) {
+        ErrorMessage.Error("Unity.CrestronHttpClient.Get({0}) SocketException: {1}", url, ex.Message);
+        return new HttpResult(ex.Message);
       }
-      return new HttpResult(0,string.Empty,string.Empty);
+      catch (Exception ex) {
+        ErrorMessage.Error("Unity.CrestronHttpClient.Get({0}) Error: {1}", url, ex.Message);
+        return new HttpResult(ex.Message);
+      }
     }
 
     public HttpResult Post(string url, string contents) {
@@ -35,7 +49,10 @@ namespace AET.Unity.SimplSharp.HttpClient {
     }
 
     public HttpResult Post(string url, string contents, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
-      if (Debug == 1) CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.Post({0})\r\nContents: {1}\r\nHeaders: {2}", url, contents, PrintDictionary(additionalHeaders));
+      if (Debug == 1) {
+        CrestronConsole.PrintLine("Unity.CrestronPooledHttpClient.Post({0})\r\nContents: {1}", url, contents);
+        if (additionalHeaders != null) CrestronConsole.PrintLine("    Headers: {0}", PrintDictionary(additionalHeaders));
+      }
       try {
         var results = pool.Post(url, contents, additionalHeaders);
         if (Debug == 1) CrestronConsole.PrintLine("Results status({0}): {1}", results.Status, results.Content);
@@ -47,6 +64,7 @@ namespace AET.Unity.SimplSharp.HttpClient {
     }
 
     private string PrintDictionary(IEnumerable<KeyValuePair<string, string>> dict) {
+      if (dict == null) return string.Empty;
       return string.Join(",", dict.Select(kv => kv.Key + "=" + kv.Value).ToArray());
     }
   }

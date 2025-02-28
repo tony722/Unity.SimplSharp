@@ -9,17 +9,22 @@ namespace AET.Unity.SimplSharp.HttpUtility {
   public sealed class HttpClientPool : IDisposable {
 
     private readonly ObjectPool<Lazy<Crestron.SimplSharp.Net.Http.HttpClient>> httpClientPool;
+    private Encoding encoding;
 
     public HttpClientPool() : this(10) { }
 
-    public HttpClientPool(int poolSize) {
+    public Encoding Encoding { get { return encoding ?? (Encoding = Encoding.UTF8); } set { encoding = value; } }
+
+    public HttpClientPool(int poolSize, int timeout) {
       httpClientPool = new ObjectPool<Lazy<Crestron.SimplSharp.Net.Http.HttpClient>>(poolSize, poolSize,
             () => new Lazy<Crestron.SimplSharp.Net.Http.HttpClient>(() => new Crestron.SimplSharp.Net.Http.HttpClient {
               TimeoutEnabled = true,
-              Timeout = 5,
+              Timeout = timeout,
               KeepAlive = false
             })) { CleanupPoolOnDispose = true };
     }
+
+    public HttpClientPool(int poolSize) : this(poolSize, 5) { }
 
     private HttpResult SendRequest(string url, RequestType requestType, string content, IEnumerable<KeyValuePair<string, string>> additionalHeaders) {
       var obj = httpClientPool.GetFromPool();
@@ -31,7 +36,7 @@ namespace AET.Unity.SimplSharp.HttpUtility {
 
         var httpRequest = new HttpClientRequest {
           RequestType = requestType,
-          Encoding = Encoding.UTF8,
+          Encoding = Encoding,
           KeepAlive = false,
         };
 
@@ -47,11 +52,12 @@ namespace AET.Unity.SimplSharp.HttpUtility {
 
         httpRequest.Url.Parse(url);
 
-        var httpResponse = client.Dispatch(httpRequest);
-        return new HttpResult(httpResponse.Code, httpResponse.ResponseUrl, httpResponse.ContentString);
+        var httpResponse = client.Dispatch(httpRequest);       
+        var responseContent = Encoding.GetString(httpResponse.ContentBytes, 0, httpResponse.ContentBytes.Length);
+        return new HttpResult(httpResponse.Code, httpResponse.ResponseUrl, responseContent);
       } finally {
         httpClientPool.AddToPool(obj);
-      }      
+      }
     }
 
 

@@ -7,8 +7,11 @@ namespace AET.Unity.SimplSharp.HttpUtility {
   public sealed class HttpsClientPool : IDisposable {
 
     private readonly ObjectPool<Lazy<Crestron.SimplSharp.Net.Https.HttpsClient>> httpClientPool;
+    private Encoding encoding;
 
     public HttpsClientPool() : this(10) { }
+
+    public Encoding Encoding { get { return encoding ?? (Encoding = Encoding.UTF8); } set { encoding = value; } }
 
     public HttpsClientPool(int poolSize, bool enableCertificateVerification) {
       httpClientPool = new ObjectPool<Lazy<Crestron.SimplSharp.Net.Https.HttpsClient>>(poolSize, poolSize,
@@ -33,7 +36,7 @@ namespace AET.Unity.SimplSharp.HttpUtility {
 
         var httpRequest = new HttpsClientRequest {
           RequestType = requestType,
-          Encoding = Encoding.UTF8,
+          Encoding = Encoding,
           KeepAlive = false,
         };
 

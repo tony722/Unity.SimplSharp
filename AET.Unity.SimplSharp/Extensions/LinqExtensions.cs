@@ -27,7 +27,7 @@ namespace AET.Unity.SimplSharp {
       return keys.Select((x) => dict[x]);
     }
 
-    public static IEnumerable<V> GetValues<K, V>(this AnyKeyDictionary<K, V> dict, IEnumerable<K> keys) where V : new() {
+    public static IEnumerable<V> GetValues<K, V>(this AnyKeyConcurrentDictionary<K, V> dict, IEnumerable<K> keys) where V : new() {
       return keys.Select((x) => dict[x]);
     }
 

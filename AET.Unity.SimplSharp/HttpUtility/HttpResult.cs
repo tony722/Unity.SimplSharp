@@ -1,7 +1,7 @@
 namespace AET.Unity.SimplSharp.HttpUtility {
   public class HttpResult {
     public int Status { get; private set; }
-
+    public string Error { get; private set; }
     public string ResponseUrl { get; private set; }
 
     public string Content { get; private set; }
@@ -10,6 +10,10 @@ namespace AET.Unity.SimplSharp.HttpUtility {
       Status = status;
       ResponseUrl = responseUrl;
       Content = content;
+    }
+
+    public HttpResult(string error) {
+      Error = error;
     }
   }
 }

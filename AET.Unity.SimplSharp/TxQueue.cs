@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AET.Unity.SimplSharp.Concurrent;
 using AET.Unity.SimplSharp.Timer;
 
 namespace AET.Unity.SimplSharp {
@@ -9,7 +10,7 @@ namespace AET.Unity.SimplSharp {
     private readonly Action<T> txAction;
     private ITimer timer;
     private readonly Dictionary<string, QueueItem> lowPriorityQueue = new Dictionary<string, QueueItem>();
-    private readonly AnyKeyDictionary<string, bool> lowPriorityQueueDisabled = new AnyKeyDictionary<string, bool>();
+    private readonly AnyKeyConcurrentDictionary<string, bool> lowPriorityQueueDisabled = new AnyKeyConcurrentDictionary<string, bool>();
     private IMutex mutex;
 
     public TxQueue(Action<T> txAction, int spaceBetweenCommandsMs) {

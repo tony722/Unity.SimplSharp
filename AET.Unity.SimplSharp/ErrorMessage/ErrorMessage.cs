@@ -15,11 +15,9 @@ namespace AET.Unity.SimplSharp {
   }
 
   public static class ErrorMessage {
-    static ErrorMessage() {
-      ErrorMessageHandler = new CrestronErrorMessageHandler();
-    }
+    private static IErrorMessageHandler errorMessageHandler;
 
-    public static IErrorMessageHandler ErrorMessageHandler { get; set; }
+    public static IErrorMessageHandler ErrorMessageHandler { get { return errorMessageHandler ?? (ErrorMessageHandler = new CrestronErrorMessageHandler()); } set { errorMessageHandler = value; } }
 
     public static void Clear() {
       LastErrorMessage = string.Empty;
@@ -59,6 +57,10 @@ namespace AET.Unity.SimplSharp {
       return true;
     }
 
+    public static bool ErrorIfNot(this bool condition, string messageFormat, params object[] arg) {
+      return !ErrorIf(!condition, messageFormat, arg);
+    }
+
     public static void Notice(string messageFormat, params object[] arg) {
       var message = string.Format(messageFormat, arg);
       ErrorMessageHandler.Notice(message);
@@ -73,7 +75,7 @@ namespace AET.Unity.SimplSharp {
     }
 
     public static bool NoticeIfNot(this bool condition, string messageFormat, params object[] arg) {
-      return NoticeIf(!condition, messageFormat, arg);
+      return !NoticeIf(!condition, messageFormat, arg);
     }
 
     public static void Warn(string messageFormat, params object[] arg) {
@@ -86,6 +88,10 @@ namespace AET.Unity.SimplSharp {
       if (!condition) return false;
       Warn(messageFormat, arg);
       return true;
+    }
+
+    public static bool WarnIfNot(this bool condition, string messageFormat, params object[] arg) {
+      return !WarnIf(!condition, messageFormat, arg);
     }
 
   }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AET.Unity.SimplSharp.Concurrent {
   public class ConcurrentList<T> : IList<T> {
